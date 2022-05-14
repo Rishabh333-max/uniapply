@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React,{createContext} from 'react';
+import React, { createContext } from 'react';
 
 import {
   SafeAreaView,
@@ -37,6 +37,8 @@ import 'react-native-gesture-handler';
 // import Citiesdata from './src/ContextData';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { useMemo } from 'react';
+import { Data } from './src/Data';
 
 // const Stack = createNativeStackNavigator();
 
@@ -44,11 +46,65 @@ export const GlobalInfo = createContext();
 
 const App = () => {
   const [state, setState] = useState([])
-console.log("state")
+  
+
+  // const contextValue = useMemo(() => ({
+  //   state,
+  //   setState,
+  // }), [state])
+
+  // console.log("state")
+
+  const [city, setCity] = useState("Agra")
+
+
+  
+  const [allDatas, setAllDatas] = useState("")
+
+  const [filterAr, setFilterAr] = useState(Data)
+  console.log("filterAr", filterAr)
+  const [cities, setCities] = useState(Data);
+
+  const filterMenu = (category) => {
+      const updatedItems = Data.filter((curElem) => {
+
+          return curElem.category === category;
+      });
+      setCities(updatedItems)
+      // console.log("up", updatedItems)
+      const upp = updatedItems.slice(0, 3)
+      setFilterAr(upp)
+
+  }
+
+  const [isModalVisible, setModalVisible] = useState(false);
+    const [activeItem, setActive] = useState(false)
+
+    const openModal = (item) => {
+        setActive(item || false)
+        setModalVisible(true)
+    }
+    const closeModal = () => {
+        setActive(false)
+        setModalVisible(false)
+    }
+
   return (
-    <GlobalInfo.Provider value={state}>
+    <GlobalInfo.Provider value={{allDatas:allDatas,
+    setAllDatas:setAllDatas,
+    filterAr:filterAr,
+    setFilterAr:setFilterAr,
+    cities:cities,
+    setCities:setCities,
+    filterMenu:filterMenu,
+    openModal:openModal,
+    closeModal:closeModal,
+    isModalVisible:isModalVisible,
+    setModalVisible:setModalVisible,
+    activeItem:activeItem,
+    setActive:setActive}}>
       <NavigationContainer>
-        <BottomTabNavigator />
+        <BottomTabNavigator  />
       </NavigationContainer>
     </GlobalInfo.Provider>
   );

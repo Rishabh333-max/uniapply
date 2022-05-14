@@ -12,6 +12,8 @@ import { Header } from "./Header";
 // import { createContext } from "react";
 // import Citiesdata from "./ContextData";
 import { AppProvider } from "./ContextData";
+import { useContext } from "react";
+import { GlobalInfo } from "../App";
 
 
 
@@ -24,6 +26,13 @@ const allData = [...new Set(Data.map((curElem) => curElem.category))]
     const [categoryItems, setCatItems] = useState(allData)
     const navigation = useNavigation()
 
+    const {allDatas,setAllDatas,filterAr,setFilterAr,cities,setCities,filterMenu,openModal,isModalVisible,activeItem,isActve,setModalVisible,closeModal}=useContext(GlobalInfo)
+
+    const filterArray = cities;
+ 
+    useEffect(() => {
+        setAllDatas(filterArray)
+    }, [filterArray])
     const showConfirmDialog = () => {
         return Alert.alert(
             "Alert!",
@@ -49,48 +58,19 @@ const allData = [...new Set(Data.map((curElem) => curElem.category))]
     const [items, setItems] = useState(Data)
 
     const route = useRoute()
-    const [isModalVisible, setModalVisible] = useState(false);
-    const [activeItem, setActive] = useState(false)
+    // const [isModalVisible, setModalVisible] = useState(false);
+    // const [activeItem, setActive] = useState(false)
 
-    const openModal = (item) => {
-        setActive(item || false)
-        setModalVisible(true)
-    }
-    const closeModal = () => {
-        setActive(false)
-        setModalVisible(false)
-    }
+    // const openModal = (item) => {
+    //     setActive(item || false)
+    //     setModalVisible(true)
+    // }
+    // const closeModal = () => {
+    //     setActive(false)
+    //     setModalVisible(false)
+    // }
     const [searchbar, setSearchbar] = useState("")
    
-    const [city, setCity] = useState("Agra")
-
-
-  
-    const [allDatas, setAllDatas] = useState("")
-
-    const [filterAr, setFilterAr] = useState(Data)
-    console.log("filterAr", filterAr)
-    const [cities, setCities] = useState(Data);
-
-    const filterMenu = (category) => {
-        const updatedItems = Data.filter((curElem) => {
-
-            return curElem.category === category;
-        });
-        setCities(updatedItems)
-        // console.log("up", updatedItems)
-        const upp = updatedItems.slice(0, 3)
-        setFilterAr(upp)
-        //   console.log("upppp",upp)
-
-    }
-
-    const filterArray = cities;
-    // console.log("filter", filterArray)
-    useEffect(() => {
-        setAllDatas(filterArray)
-    }, [filterArray])
-
 
     return (
     
@@ -172,6 +152,7 @@ filterMenu={filterMenu}
             onChangeText={(text) => setSearchbar(text)}
             value={searchbar}
             style={{ margin: 10, elevation: 20, shadowColor: "#000" }}
+            
         />
         <View style={{ marginTop: 20, height: 1, backgroundColor: 'black', width: "100%", color: "black" }} />
         <Text style={{ marginTop: 20, fontSize: 20, color: "black", marginLeft: 15, fontWeight: "600" }}>Cities</Text>

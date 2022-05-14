@@ -1,8 +1,10 @@
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { Button } from "react-native";
 import { View,Text,StyleSheet,Image } from "react-native";
 
 export const Application=()=>{
+  const navigation=useNavigation()
 return(
     
     <View style={{flex:1,justifyContent:"center",alignItems:"center",marginBottom:100}}>
@@ -12,7 +14,7 @@ return(
       
         <View style={styles.childView} >
  
-          <Text style={styles.text}>Explore Schools </Text>
+          <Text style={styles.text} onPress={()=>navigation.navigate("Schools")}>Explore Schools </Text>
  
         </View>
     </View>

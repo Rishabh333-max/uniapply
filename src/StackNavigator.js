@@ -33,7 +33,7 @@ const MainStackNavigator = () => {
       <Stack.Screen name="AllDataaa" component={AllData} options={{headerShown:false}} />
       <Stack.Screen name="Header" component={Header} options={{headerShown:false}} />
       <Stack.Screen name="ManageChild" component={ManageChild} />
-      <Stack.Screen name="Modall" component={Modall} />
+      {/* <Stack.Screen name="Modall" component={Modall} /> */}
       <Stack.Screen name="CommonForm" component={CommonForm} />
   
       {/* <Stack.Screen name="CompareSchools" component={CompareSchools} options={{headerShown:false}} />

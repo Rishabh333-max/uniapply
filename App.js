@@ -39,6 +39,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { useMemo } from 'react';
 import { Data } from './src/Data';
+import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 
 // const Stack = createNativeStackNavigator();
 
@@ -89,6 +90,15 @@ const App = () => {
         setModalVisible(false)
     }
 
+    const theme = {
+      ...DefaultTheme,
+      roundness: 2,
+      colors: {
+        ...DefaultTheme.colors,
+        primary: '#3498db',
+        accent: '#f1c40f',
+      },
+    };
   return (
     <GlobalInfo.Provider value={{allDatas:allDatas,
     setAllDatas:setAllDatas,
@@ -103,9 +113,11 @@ const App = () => {
     setModalVisible:setModalVisible,
     activeItem:activeItem,
     setActive:setActive}}>
+      <PaperProvider theme={theme}>
       <NavigationContainer>
         <BottomTabNavigator  />
       </NavigationContainer>
+      </PaperProvider>
     </GlobalInfo.Provider>
   );
 };

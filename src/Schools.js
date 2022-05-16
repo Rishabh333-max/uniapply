@@ -25,24 +25,6 @@ export const Schools = ({route}) => {
 console.log("upItems",upItems)
     console.log("citi",citi)
 
-    // const openModal = (item) => {
-    //     setActive(item || false)
-    //     setModalVisible(true)
-    // }
-    // const closeModal = () => {
-    //     setActive(false)
-    //     setModalVisible(false)
-    // }
-    // const filterMenu = (category) => {
-    //     const updatedItems = Data.filter((curElem) => {
-
-    //         return curElem.category === category;
-    //     });
-    //     setCiti(updatedItems)
-    //     console.log("up", updatedItems)
-
-
-    // }
 
     return (
 

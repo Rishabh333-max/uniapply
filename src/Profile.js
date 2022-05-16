@@ -50,8 +50,9 @@ export const Profile = () => {
                         <Image source={require('./Images/document.png')} style={{ height: 27, width: 27, }} />
                         <Text style={{ fontSize: 16, marginHorizontal: 10 }}>Common Form</Text>
                     </View>
+                    <TouchableOpacity onPress={()=>navigation.navigate("CommonForm")}>
                     <Image source={require('./Images/arrow-right.png')} style={{ height: 27, width: 27, }} />
-
+</TouchableOpacity>
 
                 </View>
                 <View style={{ flexDirection: "row", backgroundColor: "white", justifyContent: 'space-between', marginTop: 10, alignItems: "center", paddingHorizontal: 20, paddingVertical: 7 }} >

@@ -11,6 +11,7 @@ import { Header } from "./Header";
 import { CompareSchools } from "./CompareSchools";
 import { PopularSchools } from "./PopularSchools";
 import { ManageChild, Modall } from "./ManageChild";
+import { CommonForm } from "./CommonForm";
 // import { Header } from "./Header";
 
 
@@ -33,6 +34,7 @@ const MainStackNavigator = () => {
       <Stack.Screen name="Header" component={Header} options={{headerShown:false}} />
       <Stack.Screen name="ManageChild" component={ManageChild} />
       <Stack.Screen name="Modall" component={Modall} />
+      <Stack.Screen name="CommonForm" component={CommonForm} />
   
       {/* <Stack.Screen name="CompareSchools" component={CompareSchools} options={{headerShown:false}} />
       <Stack.Screen name="PopularSchools" component={PopularSchools} options={{headerShown:false}}/> */}

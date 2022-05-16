@@ -10,6 +10,7 @@ import { useNavigation } from "@react-navigation/native";
 import  AntIcon  from "react-native-vector-icons/AntDesign";
 import { ScrollView } from "react-native-gesture-handler";
 import { useEffect } from "react";
+import { StatusBar } from "react-native";
 
 export const ManageChild = (props) => {
     const submitData = props.route?.params?.submitData
@@ -33,7 +34,7 @@ export const ManageChild = (props) => {
     return (
         <>
         <ScrollView>
-            <View>
+            <View style={{flex:1,backgroundColor:"#fff"}}>
                 <View   >
                     <Feather name="plus-circle" color="black" size={30} onPress={() => navigation.navigate("Modall")} />
              
@@ -56,14 +57,27 @@ export const ManageChild = (props) => {
 <Text style={{color:"black",fontSize:30}}>{name?.submitData?.input?.email}</Text> */}
 <FlatList 
 data={submitData}
+contentContainerStyle={{
+    padding:spacing,
+    paddingTop:StatusBar.currentHeight || 42
+}}
 renderItem={(val)=>{
     console.log("vvxcx",val)
     return(
-        <>
-          <Text style={styless.fontSize}>{val?.item?.input?.name}</Text>
+        <View style={{flexDirection:"row",padding:spacing,marginBottom:spacing,borderRadius:16,backgroundColor:"white",
+        elevation: 10,
+        shadowColor: '#000',
+        }}>
+            <Image source={require('./Images/man.png')} 
+            style={{width:AVATAR_SIZE,height:AVATAR_SIZE,borderRadius:AVATAR_SIZE,
+            marginRight:spacing/2}}/>
+       <View>
+          <Text style={{fontSize:22,fontWeight:"700"}}>{val?.item?.input?.name}</Text>
 
-<Text style={styless.fontSize}>{val?.item?.input?.email}</Text>
-<Text style={styless.fontSize}>{val?.item?.input?.gender}</Text></>
+<Text style={{fontSize:18,opacity:.7}}>{val?.item?.input?.email}</Text>
+<Text style={{fontSize:14,opacity:.8,color:"#0099cc"}}>{val?.item?.input?.gender}</Text>
+</View>
+</View>
 
     )
 }}

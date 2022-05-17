@@ -317,7 +317,7 @@
 //                     toggleBtn?   <Button title="Save" onPress={() => onSubmit([submitData])} />:
 //                     <Button title="Update" onPress={() => onSubmit([submitData])} />
 //                 }
-             
+
 //                 <View>
 //                     {submitData.map((values) => {
 //                         return (
@@ -530,7 +530,7 @@ export const ManageChild = (props) => {
     //     navigation.push("ManageChild", { submitData,toggleBtn,setToggleBtn,input,setInput, })
     // }, [submitData])
 
-    const [toggleBtn,setToggleBtn]=useState(true);
+    const [toggleBtn, setToggleBtn] = useState(true);
     const [isModalVisible, setModalVisible] = useState(false);
     const [activeItem, setActive] = useState(false)
 
@@ -548,15 +548,51 @@ export const ManageChild = (props) => {
     const AVATAR_SIZE = 70;
 
 
-
+// const [storeData,setStoreData]=useState(newEditItem)
+// console.log('ssnbd',storeData)
     const editItem = (id) => {
-let newEditItem= submitData.find((elem)=>{
-return elem.id === id
-})
-console.log(".",newEditItem)
-setToggleBtn(false)
-setInput(newEditItem)
+        console.log("id", id)
+
+        let newEditItem = submitData.find((elem) => {
+            console.log(":testelem", elem)
+            return elem.id === id
+        })
+
+        console.log("./.hkjh", newEditItem)
+     
+        // useEffect(() => {
+        //     if (item)
+        //         setInput({
+        //             name: elem.input.name,
+        //             class: elem.input.class,
+        //             gender: elem.input.gender,
+        //             dates: elem.input.dates,
+        //             email: elem.input.email,
+            
+    
+        //         })
+        //     else {
+        //         setInput({
+        //             name: '',
+        //             class: '',
+        //             dates: '',
+        //             gender: '',
+                  
+        //             email: '',
+        //         })
+        //     }
+        //     // setFormErrors({})
+        // }, [elem])
+
+        // setInput(newEditItem)
     }
+
+   
+
+
+
+
+//     })
     return (
         <>
             <ScrollView>
@@ -566,21 +602,7 @@ setInput(newEditItem)
 
                     </View>
                     <View>
-                        {/* <FlatList
-                        // ListHeaderComponent={renderItem}
-                        data={particularFollowUpData}
-                        // filter(users, u => !u.isDelete)
-                        // ListHeaderComponent={ }
-                        renderItem={renderItem}
-                        keyExtractor={item => item.id}
-                    // position={absolute}
-                    /> */}
-                        {/* <Text>{name}</Text>
-                    <Text>{input.gender}</Text> */}
-                        {/* <Text>{input.name}</Text>
-    <Text>{input.gender}</Text> */}
-                        {/* <Text style={{color:"black",fontSize:30}}>{name?.submitData?.input?.name}</Text>
-<Text style={{color:"black",fontSize:30}}>{name?.submitData?.input?.email}</Text> */}
+
                         <FlatList
                             data={submitData}
 
@@ -589,13 +611,14 @@ setInput(newEditItem)
                                 paddingTop: StatusBar.currentHeight || 42
                             }}
                             renderItem={(val) => {
+                                console.log("sd", val.item.id)
                                 console.log("vvxcx", val)
                                 return (
                                     <TouchableOpacity style={{
                                         flexDirection: "row", padding: spacing, marginBottom: spacing, borderRadius: 16, backgroundColor: "white",
                                         elevation: 10,
                                         shadowColor: '#000',
-                                    }} key={val.id} onPress={() => editItem(val.id)}>
+                                    }} key={val.id} onPress={() => {editItem(val.item.id); setModalVisible(true)}}>
                                         <Image source={require('./Images/man.png')}
                                             style={{
                                                 width: AVATAR_SIZE, height: AVATAR_SIZE, borderRadius: AVATAR_SIZE,
@@ -612,193 +635,188 @@ setInput(newEditItem)
                                 )
                             }}
                         />
-                        {/* {submitData?.map((val)=>{
-    console.log("vvvv",val)
-return(
-    <>
-       <Text style={{color:"black",fontSize:30}}>{val?.input?.name}</Text>
 
-<Text style={{color:"black",fontSize:30}}>{val?.input?.email}</Text>
-<Text style={{color:"black",fontSize:30}}>{val?.input?.gender}</Text>
-    </>
-)
-})} */}
                     </View>
                 </View>
             </ScrollView>
             <Modal
 
-transparent={true}
-animationType='slide'
-visible={isModalVisible}
-onRequestClose={() => {
-    setModalVisible(!isModalVisible)
-}}
->
-<ScrollView>
-    <View style={styles.mainContainer}>
-        <Text style={styles.labels}>Name</Text>
-        <TextInput
-            style={styles.inputStyle}
-            placeholder="What is your Child's Full Name?*"
-            // mode='outlined'
-            // label='Course Name'
-            // outlineColor='#272643'
-            // id="courseName"
-            value={input?.name}
+                transparent={true}
+                animationType='slide'
+                visible={isModalVisible}
+                onRequestClose={() => {
+                    setModalVisible(!isModalVisible)
+                }}
+            >
+                <ScrollView>
+                    <View style={styles.mainContainer}>
+                        <Text style={styles.labels}>Name</Text>
+                        <TextInput
+                            style={styles.inputStyle}
+                            placeholder="What is your Child's Full Name?*"
+                            // mode='outlined'
+                            // label='Course Name'
+                            // outlineColor='#272643'
+                            // id="courseName"
+                            value={input?.name}
 
-            // onChangeText={(text) => setInput({ ...input, name: text })}
-            onChangeText={(text) => { setInput({ ...input, name: text }) }}
-        // activeOutlineColor='#272643'
-        // backgroundColor='#E7E6FC'
+                            // onChangeText={(text) => setInput({ ...input, name: text })}
+                            onChangeText={(text) => { setInput({ ...input, name: text }) }}
+                        // activeOutlineColor='#272643'
+                        // backgroundColor='#E7E6FC'
 
-        />
-        <Text style={styles.labels}>Email</Text>
-        <TextInput
-            style={styles.inputStyle}
-            placeholder="What is your Child's Number?*"
-            // mode='outlined'
-            // label='Course Name'
-            // outlineColor='#272643'
-            // id="courseName"
-            value={input?.email}
-            onChangeText={(text) => setInput({ ...input, email: text })}
-        // onChangeText={(text) => setInput({ ...input, name: text })}
+                        />
+                        <Text style={styles.labels}>Email</Text>
+                        <TextInput
+                            style={styles.inputStyle}
+                            placeholder="What is your Child's Number?*"
+                            // mode='outlined'
+                            // label='Course Name'
+                            // outlineColor='#272643'
+                            // id="courseName"
+                            value={input?.email}
+                            onChangeText={(text) => setInput({ ...input, email: text })}
+                        // onChangeText={(text) => setInput({ ...input, name: text })}
 
-        // activeOutlineColor='#272643'
-        // backgroundColor='#E7E6FC'
+                        // activeOutlineColor='#272643'
+                        // backgroundColor='#E7E6FC'
 
-        />
-        <Text style={styles.labels}>Gender</Text>
-        <View style={{
-            borderWidth: 1,
-            borderColor: 'rgba(0,0,0,0.3)',
-            paddingHorizontal: 15,
-            paddingVertical: 7,
-            borderRadius: 1,
-            fontFamily: 'regular',
-            fontSize: 18,
+                        />
+                        <Text style={styles.labels}>Gender</Text>
+                        <View style={{
+                            borderWidth: 1,
+                            borderColor: 'rgba(0,0,0,0.3)',
+                            paddingHorizontal: 15,
+                            paddingVertical: 7,
+                            borderRadius: 1,
+                            fontFamily: 'regular',
+                            fontSize: 18,
 
-            backgroundColor: "white"
-        }}>
-
-
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <RadioButton
-                    value={input?.gender}
-                    label="bsaxb"
-                    color='#588fba'
-
-                    status={input?.gender === 'MALE' ? 'checked' : 'unchecked'}
-                    onPress={() => setInput({ ...input, gender: 'MALE' })}
-                />
-                <Text>Male     </Text>
-
-                <RadioButton
-                    value={input?.gender}
-                    color='#588fba'
-
-                    status={input?.gender === 'FEMALE' ? 'checked' : 'unchecked'}
-                    onPress={() => setInput({ ...input, gender: 'FEMALE' })}
-                />
-                <Text>Female      </Text>
-                <RadioButton
-                    value={input?.gender}
-                    color='#588fba'
-
-                    status={input?.gender === 'OTHER' ? 'checked' : 'unchecked'}
-                    onPress={() => setInput({ ...input, gender: 'OTHER' })}
-                />
-                <Text>Other</Text>
+                            backgroundColor: "white"
+                        }}>
 
 
-            </View>
-        </View>
-        <Text style={styles.labels}>Date</Text>
-        {
-            dateVisible &&
-            <DateTimePicker
-                value={date}
-                mode={mode}
-                onChange={onChange}
+                            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                <RadioButton
+                                    value={input?.gender}
+                                    label="bsaxb"
+                                    color='#588fba'
 
-            />
+                                    status={input?.gender === 'MALE' ? 'checked' : 'unchecked'}
+                                    onPress={() => setInput({ ...input, gender: 'MALE' })}
+                                />
+                                <Text>Male     </Text>
 
-        }
-        <View style={[styles.inputStyle, { flexDirection: "row" }]}>
-            <Text style={{ fontSize: 16, fontWeight: '330', color: 'black', paddingRight: 6 }}>Date of Birth:  </Text>
-            <Text style={{ fontSize: 16, fontWeight: '400', color: 'black', paddingRight: 65 }}>{date.toLocaleDateString()}</Text>
-            <AntIcon name='calendar' onPress={showDatepicker} size={30} color='#272643' />
-        </View>
+                                <RadioButton
+                                    value={input?.gender}
+                                    color='#588fba'
 
-        <View>
-            <AntIcon name='calendar' onPress={showDatepicker} size={30} color='#272643' />
-        </View>
+                                    status={input?.gender === 'FEMALE' ? 'checked' : 'unchecked'}
+                                    onPress={() => setInput({ ...input, gender: 'FEMALE' })}
+                                />
+                                <Text>Female      </Text>
+                                <RadioButton
+                                    value={input?.gender}
+                                    color='#588fba'
 
-        <Text style={{ color: "black" }}>selected: {date.toLocaleDateString()}</Text>
-        {show && (
-            <DateTimePicker
-                testID="dateTimePicker"
-                value={input?.dates}
-                mode={mode}
-                is24Hour={true}
-                onChange={onChange}
-            />
-        )}
+                                    status={input?.gender === 'OTHER' ? 'checked' : 'unchecked'}
+                                    onPress={() => setInput({ ...input, gender: 'OTHER' })}
+                                />
+                                <Text>Other</Text>
 
-        <Text style={styles.labels}>Class</Text>
-        <View style={styles.inputStyle}>
-            <SelectPicker selectedValue={input?.class} onValueChange={(itemValue, itemIndex) => setInput(pre => Object.assign({}, pre, { class: itemValue }))}>
-                <SelectPicker.Item label="Select Admission Class" backgroundColor='#E7E6FC'
-                ></SelectPicker.Item>
-                <SelectPicker.Item label="Play Group" value='PlayGroup'>
-                </SelectPicker.Item>
-                <SelectPicker.Item label="Pre-Nursery" value='Pre-Nursery'></SelectPicker.Item>
-                <SelectPicker.Item label="Nursery" value='Nursery' ></SelectPicker.Item>
-                <SelectPicker.Item label="LKG" value='LKG' ></SelectPicker.Item>
-                <SelectPicker.Item label="UKG" value='UKG' ></SelectPicker.Item>
-                <SelectPicker.Item label="Class 1" value='Class 1' ></SelectPicker.Item>
-                <SelectPicker.Item label="Class 2 " value='Class 2 ' ></SelectPicker.Item>
-                <SelectPicker.Item label="Class 3" value='Class 3' ></SelectPicker.Item>
-                <SelectPicker.Item label="Class 4" value='Class 4' ></SelectPicker.Item>
-                <SelectPicker.Item label="Class 5" value='Class 5' ></SelectPicker.Item>
-                <SelectPicker.Item label="Class 6" value='Class 6' ></SelectPicker.Item>
-                <SelectPicker.Item label="Class 7" value='Class 7' ></SelectPicker.Item>
-                <SelectPicker.Item label="Class 8" value='Class 8' ></SelectPicker.Item>
-                <SelectPicker.Item label="Class 9" value='Class 9' ></SelectPicker.Item>
-                <SelectPicker.Item label="Class 10" value='Class 10' ></SelectPicker.Item>
-                <SelectPicker.Item label="Class 11" value='Class 11' ></SelectPicker.Item>
-                <SelectPicker.Item label="Class 12" value='Class 12' ></SelectPicker.Item>
 
-            </SelectPicker>
-        </View>
-        {
-            toggleBtn?   <Button title="Save" onPress={() => onSubmit([submitData])} />:
+                            </View>
+                        </View>
+                        <Text style={styles.labels}>Date</Text>
+                        {
+                            dateVisible &&
+                            <DateTimePicker
+                                value={date}
+                                mode={mode}
+                                onChange={onChange}
+
+                            />
+
+                        }
+                        <View style={[styles.inputStyle, { flexDirection: "row" }]}>
+                            <Text style={{ fontSize: 16, fontWeight: '330', color: 'black', paddingRight: 6 }}>Date of Birth:  </Text>
+                            <Text style={{ fontSize: 16, fontWeight: '400', color: 'black', paddingRight: 65 }}>{date.toLocaleDateString()}</Text>
+                            <AntIcon name='calendar' onPress={showDatepicker} size={30} color='#272643' />
+                        </View>
+
+                        <View>
+                            <AntIcon name='calendar' onPress={showDatepicker} size={30} color='#272643' />
+                        </View>
+
+                        <Text style={{ color: "black" }}>selected: {date.toLocaleDateString()}</Text>
+                        {show && (
+                            <DateTimePicker
+                                testID="dateTimePicker"
+                                value={input?.dates}
+                                mode={mode}
+                                is24Hour={true}
+                                onChange={onChange}
+                            />
+                        )}
+
+                        <Text style={styles.labels}>Class</Text>
+                        <View style={styles.inputStyle}>
+                            <SelectPicker selectedValue={input?.class} onValueChange={(itemValue, itemIndex) => setInput(pre => Object.assign({}, pre, { class: itemValue }))}>
+                                <SelectPicker.Item label="Select Admission Class" backgroundColor='#E7E6FC'
+                                ></SelectPicker.Item>
+                                <SelectPicker.Item label="Play Group" value='PlayGroup'>
+                                </SelectPicker.Item>
+                                <SelectPicker.Item label="Pre-Nursery" value='Pre-Nursery'></SelectPicker.Item>
+                                <SelectPicker.Item label="Nursery" value='Nursery' ></SelectPicker.Item>
+                                <SelectPicker.Item label="LKG" value='LKG' ></SelectPicker.Item>
+                                <SelectPicker.Item label="UKG" value='UKG' ></SelectPicker.Item>
+                                <SelectPicker.Item label="Class 1" value='Class 1' ></SelectPicker.Item>
+                                <SelectPicker.Item label="Class 2 " value='Class 2 ' ></SelectPicker.Item>
+                                <SelectPicker.Item label="Class 3" value='Class 3' ></SelectPicker.Item>
+                                <SelectPicker.Item label="Class 4" value='Class 4' ></SelectPicker.Item>
+                                <SelectPicker.Item label="Class 5" value='Class 5' ></SelectPicker.Item>
+                                <SelectPicker.Item label="Class 6" value='Class 6' ></SelectPicker.Item>
+                                <SelectPicker.Item label="Class 7" value='Class 7' ></SelectPicker.Item>
+                                <SelectPicker.Item label="Class 8" value='Class 8' ></SelectPicker.Item>
+                                <SelectPicker.Item label="Class 9" value='Class 9' ></SelectPicker.Item>
+                                <SelectPicker.Item label="Class 10" value='Class 10' ></SelectPicker.Item>
+                                <SelectPicker.Item label="Class 11" value='Class 11' ></SelectPicker.Item>
+                                <SelectPicker.Item label="Class 12" value='Class 12' ></SelectPicker.Item>
+
+                            </SelectPicker>
+                        </View>
+                        <Button title="Save" onPress={() =>{ onSubmit([submitData]); }} />
+                        {/* {
+            toggleBtn?
+            <Button title="Save" onPress={() => onSubmit([submitData])} />:
             <Button title="Update" onPress={() => onSubmit([submitData])} />
         }
-     
-        <View>
-            {submitData.map((values) => {
-                return (
-                    <>
-                        <Text style={{ color: "black" }}>{values.input.name}</Text>
-                        <Text style={{ color: "black" }}>{values.input.email}</Text>
-                        <Text style={{ color: "black" }}>{values.input.gender}</Text>
-                        <Text style={{ color: "black" }}>{values.input.class}</Text>
-                    </>
-                )
-            })}
-        </View>
-    </View>
+     */}
 
-</ScrollView>
-</Modal>
+
+
+                        <View>
+                            {submitData.map((values) => {
+                                return (
+                                    <>
+                                        <Text style={{ color: "black" }}>{values.input.name}</Text>
+                                        <Text style={{ color: "black" }}>{values.input.email}</Text>
+                                        <Text style={{ color: "black" }}>{values.input.gender}</Text>
+                                        <Text style={{ color: "black" }}>{values.input.class}</Text>
+                                    </>
+                                )
+                            })}
+                        </View>
+                    </View>
+
+                </ScrollView>
+            </Modal>
         </>
 
     )
 }
 
-      
+
 
 const styles = StyleSheet.create({
     textStyle: {

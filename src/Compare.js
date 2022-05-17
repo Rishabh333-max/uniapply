@@ -1,85 +1,90 @@
-import { useNavigation } from "@react-navigation/native";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import React from "react";
-import { useContext,useState } from "react";
-import { View,Text,ScrollView,TouchableOpacity,Image,Modal,SafeAreaView,StyleSheet } from "react-native";
+import { useContext, useState } from "react";
+import { View, Text, ScrollView, TouchableOpacity, Image, Modal, SafeAreaView, StyleSheet } from "react-native";
 import { Searchbar } from "react-native-paper";
 import { GlobalInfo } from "../App";
 import { Data } from "./Data";
 import { Header } from "./Header";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import { CommonForm } from "./CommonForm";
+import PagerView from 'react-native-pager-view';
 
 
 
-export const Compare=()=>{
-    const {allDatas,setAllDatas,filterAr,setFilterAr,cities,setCities,filterMenu,filterArray,openModal,isModalVisible,setActive,setModalVisible,activeItem,closeModal}=useContext(GlobalInfo);
-  console.log("open",openModal)
+export const Compare = () => {
+    const { allDatas, setAllDatas, filterAr, setFilterAr, cities, setCities, filterMenu, filterArray, openModal, isModalVisible, setActive, setModalVisible, activeItem, closeModal } = useContext(GlobalInfo);
+    console.log("open", openModal)
     const navigation = useNavigation()
- 
 
 
-    return (
-
-        
-      
-                <ScrollView style={{backgroundColor:"white"}}>
-<View >
-         <Header openModal={openModal} isModalVisible={isModalVisible}  setActive={setActive} setModalVisible={setModalVisible} activeItem={activeItem} closeModal={closeModal} cities={cities}/>
-         
- <MyTabs cities={cities}/>
-        </View>
-            </ScrollView>
-                   
-     
-)
-}
-
-function MyTabs({cities}) {
-
-    const Tab = createMaterialTopTabNavigator();
 
     return (
-        <Tab.Navigator initialRouteName="Feed"
-            screenOptions={{
-                tabBarActiveTintColor: 'black',
-                tabBarLabelStyle: { fontSize: 12 },
-                tabBarPressColor: '#c9e2f1',
-                tabBarStyle: { backgroundColor: 'white', marginTop: 5 },
-            }}>
-            <Tab.Screen name="CompareSchools" options={{ tabBarLabel: 'Compare Schools', tabBarLabelStyle: { fontSize: 16, fontWeight: '500' } }} >
-                {() => <CompareSchools cities={cities} />}
-            </Tab.Screen>
-            <Tab.Screen name="PopularSchools" options={{ tabBarLabel: 'Popular Schools', tabBarLabelStyle: { fontSize: 16, fontWeight: '500' } }} >
-                {() => <PopularSchools cities={cities} />}</Tab.Screen>
-            {/* <Tab.Screen name="ListEnquiry" component={ListEnquiry} /> */}
-          
 
-        </Tab.Navigator>
-    );
-}
 
-export const CompareSchools=()=>{
-    const {allDatas,setAllDatas,filterAr,setFilterAr,cities,setCities,filterMenu,openModal,isModalVisible,activeItem,isActve,setModalVisible,closeModal}=useContext(GlobalInfo)
-    return(
-        <SafeAreaView style={{ paddingTop: 40, paddingLeft: 40, paddingRight: 40, justifyContent: "space-between", flexDirection: "row" }}>
-        <View style={styles.categoryItemWrapper}>
-            <Image source={require("./Images/plus.png")} style={styles.categoryItemImage} />
-            <Text style={styles.categoryItemTitle}>Compare Schools</Text>
-            <View style={styles.categorySelectWrapper}>
-               
-            </View>
+        <ScrollView style={{ backgroundColor: "white" }}>
+            <View >
+                <Header openModal={openModal} isModalVisible={isModalVisible} setActive={setActive} setModalVisible={setModalVisible} activeItem={activeItem} closeModal={closeModal} cities={cities} />
+
+                {/* <MyTabs cities={cities} /> */}
+                <PagerView style={styles.pagerView} initialPage={0}>
+        <View key="1">
+          <Text>First page</Text>
         </View>
-        <View style={styles.categoryItemWrapper}>
-            <Image source={require("./Images/plus.png")} style={styles.categoryItemImage} />
-            <Text style={styles.categoryItemTitle}>Popular Schools</Text>
-            <View style={styles.categorySelectWrapper}>
-               
-            </View>
+        <View key="2">
+          <Text>Second page</Text>
         </View>
-    </SafeAreaView>
+      </PagerView>
+            </View>
+
+
+        </ScrollView>
+
+
     )
 }
 
+
+
+// export const CompareSchools = () => {
+//     console.log('sdhdcbchjds')
+//     const { allDatas, setAllDatas, filterAr, setFilterAr, cities, setCities, filterMenu, openModal, isModalVisible, activeItem, isActve, setModalVisible, closeModal } = useContext(GlobalInfo)
+//     console.log('sdhdcbchjds',cities)
+//     return (
+//         <SafeAreaView style={{ paddingTop: 40, paddingLeft: 40, paddingRight: 40, justifyContent: "space-between", flexDirection: "row", backgroundColor:'red' }}>
+//             <View style={styles.categoryItemWrapper}>
+//                 {    console.log('sdhdcbchjds',cities)}
+//                 <Image source={require("./Images/plus.png")} style={styles.categoryItemImage} />
+//                 <Text style={styles.categoryItemTitle}>Compare Schools</Text>
+//                 <View style={styles.categorySelectWrapper}>
+
+//                 </View>
+//             </View>
+//             <View style={styles.categoryItemWrapper}>
+//                 <Image source={require("./Images/plus.png")} style={styles.categoryItemImage} />
+//                 <Text style={styles.categoryItemTitle}>Popular Schools</Text>
+//                 <View style={styles.categorySelectWrapper}>
+
+//                 </View>
+//             </View>
+//         </SafeAreaView>
+//     )
+// }
+
+// export const PopularSchools = () => {
+//     return (
+//         <View>
+//             <Text>Hi Rishabh</Text>
+//         </View>
+//     )
+// }
+
+
 const styles = StyleSheet.create({
+    pagerView: {
+        flex: 1,
+        backgroundColor:"red"
+      },
     centeredView: {
         flex: 1,
         justifyContent: "center",
@@ -200,16 +205,129 @@ const styles = StyleSheet.create({
         marginBottom: 2,
         lineHeight: 25,
         fontFamily: "regular"
-    }
+    },
+    brandView: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    brandViewText: {
+        color: "#ffffff",
+        fontSize: 40,
+        fontWeight: "bold",
+        textTransform: "uppercase"
+    },
+    bottomView: {
+        flex: 1.5,
+        backgroundColor: "#ffffff",
+        bottom: 50,
+        borderTopStartRadius: 60,
+        borderTopEndRadius: 60
+    },
+    categoryListWrapper: {
+        paddingTop: 20,
+        marginLeft: 170,
+
+    },
+    categoryItemWrapper: {
+        backgroundColor: "white",
+        // marginRight:20,
+        borderRadius: 20,
+        alignSelf: "center",
+        elevation: 40,
+        width: 150,
+        height: 200,
+        shadowColor: "#000",
+        marginTop: 20
+
+        // marginHorizontal:20
+    },
+    categoryItemImage: {
+        width: 50,
+        height: 50,
+        marginLeft: 50,
+        marginTop: 25
+    },
+    categoryItemTitle: {
+        textAlign: "center",
+        fontFamily: "Montserrat-semiBold",
+        fontSize: 14,
+        marginTop: 15,
+        fontSize: 20,
+        fontWeight: "bold",
+        color: "#272643"
+
+    },
+    categorySelectWrapper: {
+        alignSelf: "center",
+        justifyContent: "center",
+        marginTop: 20,
+        width: 40,
+        height: 40,
+        // fontSize:15,
+        borderRadius: 50,
+        marginBottom: 10,
+        backgroundColor: "#000"
+    },
+    categorySelectIcon: {
+        alignSelf: "center",
+        color: "white",
+    },
+    userProfileView: {
+        flexDirection: 'row',
+        // justifyContent: "center",
+        padding: 20,
+        marginTop: 15,
+        // marginBottom: 10,
+        borderRadius: 12,
+        backgroundColor: "rgba(255,255,255,0.9)",
+        elevation: 10,
+        shadowColor: '#000',
+        textAlign: 'center'
+    },
+    userProfileTextStyle: {
+        color: 'black',
+        fontSize: 18,
+        marginLeft: 15
+    },
+
 });
 
 
 
-export const PopularSchools=()=>{
-    return(
-        <View>
-            <Text>Hi Rishabh</Text>
-        </View>
-    )
-}
 
+
+
+{/* <Tab.Navigator
+screenOptions={{
+    tabBarActiveTintColor: 'black',
+    tabBarLabelStyle: { fontSize: 12 },
+    tabBarPressColor: '#c9e2f1',
+    tabBarStyle: { backgroundColor: 'white', marginTop: 5 },
+}}>
+<Tab.Screen name="CompareSchools" options={{ tabBarLabel: 'Compare Schools', tabBarLabelStyle: { fontSize: 16, fontWeight: '500' } }} >
+{
+    () => <View style={{backgroundColor:"red", height:300}}>
+        <Text>Gello</Text>
+    </View>
+}
+</Tab.Screen>
+<Tab.Screen name="PopularSchools" options={{ tabBarLabel: 'Popular Schools', tabBarLabelStyle: { fontSize: 16, fontWeight: '500' } }} >
+    {() => <PopularSchools cities={cities} />}</Tab.Screen> 
+
+
+
+</Tab.Navigator> */}
+
+// function MyTabs({ cities }) {
+
+//     // const Tab = createMaterialTopTabNavigator();
+
+//     return (
+
+          
+
+
+   
+//     );
+// }

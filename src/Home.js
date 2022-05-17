@@ -1,5 +1,5 @@
 import React, { useEffect, useState,createContext } from "react";
-import { View, Text, TouchableOpacity, Image, Alert, ScrollView, Button } from 'react-native'
+import { View, Text, TouchableOpacity, Image, Alert, ScrollView, Button,StyleSheet,TextInput,FlatList } from 'react-native'
 import EvilIcons from "react-native-vector-icons/EvilIcons";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
@@ -14,7 +14,8 @@ import { Header } from "./Header";
 import { AppProvider } from "./ContextData";
 import { useContext } from "react";
 import { GlobalInfo } from "../App";
-
+import  Feather  from "react-native-vector-icons/Feather";
+import { StatusBar } from "react-native";
 
 
 const allData = [...new Set(Data.map((curElem) => curElem.category))]
@@ -27,6 +28,8 @@ const allData = [...new Set(Data.map((curElem) => curElem.category))]
     const navigation = useNavigation()
 
     const {allDatas,setAllDatas,filterAr,setFilterAr,cities,setCities,filterMenu,openModal,isModalVisible,activeItem,isActve,setModalVisible,closeModal}=useContext(GlobalInfo)
+    // console.log("Citiesass",cities)
+    // console.log("filterATATAT",filterAr)
 
     const filterArray = cities;
  
@@ -58,35 +61,67 @@ const allData = [...new Set(Data.map((curElem) => curElem.category))]
     const [items, setItems] = useState(Data)
 
     const route = useRoute()
-    // const [isModalVisible, setModalVisible] = useState(false);
-    // const [activeItem, setActive] = useState(false)
+    const [isModalVisible1, setModalVisible1] = useState(false);
+    const [activeItem1, setActive1] = useState(false)
 
-    // const openModal = (item) => {
-    //     setActive(item || false)
-    //     setModalVisible(true)
-    // }
-    // const closeModal = () => {
-    //     setActive(false)
-    //     setModalVisible(false)
-    // }
+    const openModal1 = (item) => {
+        setActive1(item || false)
+        setModalVisible1(true)
+    }
+    const closeModal1 = () => {
+        setActive1(false)
+        setModalVisible1(false)
+    }
     const [searchbar, setSearchbar] = useState("")
-   
 
+    const [dataUse,setDataUse]=useState([])
+    console.log("dataUse",dataUse)
+    useEffect(() => {
+        setDataUse(cities)
+    }, [cities])
+    const dataFilter = (e) => {
+        const keyword = e;
+
+        if (keyword !== '') {
+            const results = dataUse.filter((inputFilter) => {
+console.log("i",inputFilter)
+                return inputFilter.name.toLowerCase().startsWith(keyword.toLowerCase()) 
+            });
+
+            setDataUse(results);
+        } else {
+            setDataUse(cities);
+            console.log("cities", cities)
+
+        }
+    }
+
+
+    useEffect(() => {
+        dataFilter(searchbar);
+    }, [searchbar])
+
+    const spacing=20;
     return (
     
 
    <>
-            <ScrollView>
+            <ScrollView style={{backgroundColor:"white"}}>
             
          
               
                 <Header openModal={openModal} cities={cities} />
-                <Searchbar
-                    placeholder="Which School are you looking?"
-                    onChangeText={(text) => setSearchbar(text)}
-                    value={searchbar}
-                    style={{ margin: 10, elevation: 2 }}
-                />
+            
+<TouchableOpacity style={styles.searchSection}      onPress={openModal1}>
+    <Feather name="search" size={20} color="#000"/>
+                 <TextInput
+     style={styles.input}
+     editable={false}
+
+     selectTextOnFocus={false}
+      
+        />
+            </TouchableOpacity>
                 <TouchableOpacity onPress={() => { showConfirmDialog() }}>
                     <Image source={require("./Images/1211.jpg")} style={{ width: "95%", height: 250, margin: 10 }} />
                 </TouchableOpacity >
@@ -147,13 +182,16 @@ filterMenu={filterMenu}
                 <Image source={require("./Images/close.png")} style={{ height: 18, width: 18, marginTop: 20, marginLeft: 150 }} />
             </TouchableOpacity>
         </View>
+        <View >
         <Searchbar
             placeholder="Search location, locality, popular area, city"
-            onChangeText={(text) => setSearchbar(text)}
-            value={searchbar}
+            // onChangeText={(text) => setSearchbar(text)}
+            // value={searchbar}
             style={{ margin: 10, elevation: 20, shadowColor: "#000" }}
+            onPress={openModal1}
             
         />
+        </View>
         <View style={{ marginTop: 20, height: 1, backgroundColor: 'black', width: "100%", color: "black" }} />
         <Text style={{ marginTop: 20, fontSize: 20, color: "black", marginLeft: 15, fontWeight: "600" }}>Cities</Text>
         <View style={{ display: 'flex', flexWrap: "wrap", flexDirection: "row" }} >
@@ -301,6 +339,53 @@ filterMenu={filterMenu}
 </ScrollView>
 
 </Modal>
+<Modal 
+animationType='slide'
+visible={isModalVisible1}
+onRequestClose={() => {
+    setModalVisible1(!isModalVisible1)
+}}
+>
+        {/* <Searchbar
+                disable={true}
+                    placeholder="Which School are you looking?"
+                    onChangeText={(text) => setSearchbar(text)}
+                    value={searchbar}
+                    onPress={openModal1}
+                    style={{ margin: 10, elevation: 2 }}
+                /> */}
+    <View>
+    <View >
+<Header openModal={openModal} cities={cities} />
+</View>
+           
+<View style={styles.searchSection}     >
+    <Feather name="search" size={20} color="#000"/>
+                 <TextInput
+     style={styles.input}
+     value={searchbar}
+     onChangeText={(newVal) => setSearchbar(newVal)}
+     placeholder="Which School are you looking?"
+      
+        />
+            </View>
+            <FlatList
+                            data={dataUse}
+
+                            contentContainerStyle={{
+                                padding: spacing,
+                                paddingTop: StatusBar.currentHeight || 42
+                            }}
+                            renderItem={(val) => {
+                            
+                                console.log("vvxasdasdasadsadssadasd", val)
+                                return(
+<Text>{val.item.name}</Text>
+                                )
+                            }}/>
+        
+            </View>
+</Modal>
 </>
          
           
@@ -310,5 +395,44 @@ filterMenu={filterMenu}
 }
 export default Home;
 
+const styles=StyleSheet.create({
+    searchBar: {
+        fontSize: 24,
+        margin: 10,
+        width: '90%',
+        height: 50,
+        backgroundColor: '#fff',
+        borderColor:"grey",
+        borderWidth:1,
+        shadowColor:"black",
+        elevation:10
+      },
+      searchSection: {
+      margin:20,
+     
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#fff',
+        borderColor:"grey",
+        borderWidth:1,
+        shadowColor:"black",
+        elevation:10
+    },
+    searchIcon: {
+        padding: 10,
+        marginLeft:20
+    },
+    input: {
+        flex: 1,
+        paddingTop: 10,
+        paddingRight: 10,
+        paddingBottom: 10,
+        paddingLeft: 0,
+        backgroundColor: '#fff',
+        color: '#424242',
+    },
+  
+})
 
 

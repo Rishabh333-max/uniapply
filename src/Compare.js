@@ -13,7 +13,7 @@ import PagerView from 'react-native-pager-view';
 
 
 export const Compare = () => {
-    const { allDatas, setAllDatas, filterAr, setFilterAr, cities, setCities, filterMenu, filterArray, openModal, isModalVisible, setActive, setModalVisible, activeItem, closeModal } = useContext(GlobalInfo);
+    const {allDatas,setAllDatas,filterAr,setFilterAr,cities,setCities,filterMenu,openModal,openModal1,isModalVisible,isModalVisible1,activeItem,activeItem1,setActive,setActive1,setModalVisible,setModalVisible1,closeModal,closeModal1,searchbar:searchbar,setSearchbar:setSearchbar,dataUse:dataUse,setDataUse:setDataUse,dataFilter:dataFilter,}=useContext(GlobalInfo)
     console.log("open", openModal)
     const navigation = useNavigation()
 
@@ -22,23 +22,16 @@ export const Compare = () => {
     return (
 
 
-        <ScrollView style={{ backgroundColor: "white" }}>
+        <View style={{flex:1}}>
             <View >
                 <Header openModal={openModal} isModalVisible={isModalVisible} setActive={setActive} setModalVisible={setModalVisible} activeItem={activeItem} closeModal={closeModal} cities={cities} />
 
-                {/* <MyTabs cities={cities} /> */}
-                <PagerView style={styles.pagerView} initialPage={0}>
-        <View key="1">
-          <Text>First page</Text>
-        </View>
-        <View key="2">
-          <Text>Second page</Text>
-        </View>
-      </PagerView>
+            
             </View>
 
+<MyTabs cities={cities} />
 
-        </ScrollView>
+        </View>
 
 
     )
@@ -46,39 +39,66 @@ export const Compare = () => {
 
 
 
-// export const CompareSchools = () => {
-//     console.log('sdhdcbchjds')
-//     const { allDatas, setAllDatas, filterAr, setFilterAr, cities, setCities, filterMenu, openModal, isModalVisible, activeItem, isActve, setModalVisible, closeModal } = useContext(GlobalInfo)
-//     console.log('sdhdcbchjds',cities)
-//     return (
-//         <SafeAreaView style={{ paddingTop: 40, paddingLeft: 40, paddingRight: 40, justifyContent: "space-between", flexDirection: "row", backgroundColor:'red' }}>
-//             <View style={styles.categoryItemWrapper}>
-//                 {    console.log('sdhdcbchjds',cities)}
-//                 <Image source={require("./Images/plus.png")} style={styles.categoryItemImage} />
-//                 <Text style={styles.categoryItemTitle}>Compare Schools</Text>
-//                 <View style={styles.categorySelectWrapper}>
+export const CompareSchools = () => {
+    console.log('sdhdcbchjds')
+    const {allDatas,setAllDatas,filterAr,setFilterAr,cities,setCities,filterMenu,openModal,openModal1,isModalVisible,isModalVisible1,activeItem,activeItem1,setActive,setActive1,setModalVisible,setModalVisible1,closeModal,closeModal1,searchbar,setSearchbar,dataUse,setDataUse,dataFilter,}=useContext(GlobalInfo)
 
-//                 </View>
-//             </View>
-//             <View style={styles.categoryItemWrapper}>
-//                 <Image source={require("./Images/plus.png")} style={styles.categoryItemImage} />
-//                 <Text style={styles.categoryItemTitle}>Popular Schools</Text>
-//                 <View style={styles.categorySelectWrapper}>
+    return (
+        <SafeAreaView style={{  flexDirection: "row",backgroundColor:"#e6e6fa",flex:1}}>
+            <View style={styles.categoryItemWrapper}>
+            <TouchableOpacity onPress={openModal1}>
+                <Image source={require("./Images/plus.png")} color="#e6e6fa" style={styles.categoryItemImage}  />
+                </TouchableOpacity>
+                <Text style={styles.categoryItemTitle}>Add School</Text>
+           
+            </View>
+            <View style={styles.categoryItemWrapper}>
+            <TouchableOpacity onPress={openModal1}>
+                <Image source={require("./Images/plus.png")} color="#e6e6fa" style={styles.categoryItemImage}  />
+                </TouchableOpacity>
+                <Text style={styles.categoryItemTitle}>Add School</Text>
+             
+            </View>
+        </SafeAreaView>
+     
+    )
+}
 
-//                 </View>
-//             </View>
-//         </SafeAreaView>
-//     )
-// }
+export const PopularSchools = () => {
+    return (
+        <View>
+            <Text>Hi Rishabh</Text>
+        </View>
+    )
+}
 
-// export const PopularSchools = () => {
-//     return (
-//         <View>
-//             <Text>Hi Rishabh</Text>
-//         </View>
-//     )
-// }
 
+const Tab = createMaterialTopTabNavigator();
+
+function MyTabs() {
+  return (
+    <Tab.Navigator
+    
+      screenOptions={{
+        tabBarActiveTintColor: '#034694',
+        tabBarLabelStyle: { fontSize: 12 },
+        tabBarStyle: { backgroundColor: 'white' },
+      }}
+    >
+      <Tab.Screen
+        name="CompareSchools"
+        component={CompareSchools}
+        options={{ tabBarLabel: 'Compare Schools' }}
+      />
+      <Tab.Screen
+        name="PopularSchools"
+        component={PopularSchools}
+        options={{ tabBarLabel: 'Popular Schools' }}
+      />
+
+    </Tab.Navigator>
+  );
+}
 
 const styles = StyleSheet.create({
     pagerView: {
@@ -230,45 +250,41 @@ const styles = StyleSheet.create({
 
     },
     categoryItemWrapper: {
+      flex:1,
         backgroundColor: "white",
         // marginRight:20,
-        borderRadius: 20,
-        alignSelf: "center",
-        elevation: 40,
-        width: 150,
-        height: 200,
+        borderRadius: 2,
+       padding:20,
+        elevation: 10,
+    //   paddingHorizontal:30,
+      paddingVertical:8,
+      marginTop:20,
+      height:130,
+      width:180,
+      alignItems:"center",
         shadowColor: "#000",
-        marginTop: 20
+        marginHorizontal:20,
+        justifyContent:"center",
+        borderRadius:4
 
-        // marginHorizontal:20
     },
     categoryItemImage: {
-        width: 50,
-        height: 50,
-        marginLeft: 50,
-        marginTop: 25
+        width: 36,
+        height: 36,
+        color:"#034694"
+   
     },
     categoryItemTitle: {
         textAlign: "center",
         fontFamily: "Montserrat-semiBold",
         fontSize: 14,
         marginTop: 15,
-        fontSize: 20,
-        fontWeight: "bold",
-        color: "#272643"
+        fontSize: 18,
+        fontWeight: "500",
+        color: "black"
 
     },
-    categorySelectWrapper: {
-        alignSelf: "center",
-        justifyContent: "center",
-        marginTop: 20,
-        width: 40,
-        height: 40,
-        // fontSize:15,
-        borderRadius: 50,
-        marginBottom: 10,
-        backgroundColor: "#000"
-    },
+ 
     categorySelectIcon: {
         alignSelf: "center",
         color: "white",

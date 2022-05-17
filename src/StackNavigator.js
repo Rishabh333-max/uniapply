@@ -35,9 +35,9 @@ const MainStackNavigator = () => {
       <Stack.Screen name="ManageChild" component={ManageChild} />
       {/* <Stack.Screen name="Modall" component={Modall} /> */}
       <Stack.Screen name="CommonForm" component={CommonForm} />
-{/*   
+ 
       <Stack.Screen name="CompareSchools" component={CompareSchools} options={{headerShown:false}} />
-      <Stack.Screen name="PopularSchools" component={PopularSchools} options={{headerShown:false}}/>  */}
+      <Stack.Screen name="PopularSchools" component={PopularSchools} options={{headerShown:false}}/>  
      
     </Stack.Navigator>
   );

@@ -27,7 +27,7 @@ const allData = [...new Set(Data.map((curElem) => curElem.category))]
     const [categoryItems, setCatItems] = useState(allData)
     const navigation = useNavigation()
 
-    const {allDatas,setAllDatas,filterAr,setFilterAr,cities,setCities,filterMenu,openModal,isModalVisible,activeItem,isActve,setModalVisible,closeModal}=useContext(GlobalInfo)
+    const {allDatas,setAllDatas,filterAr,setFilterAr,cities,setCities,filterMenu,openModal,openModal1,isModalVisible,isModalVisible1,activeItem,activeItem1,setActive,setActive1,setModalVisible,setModalVisible1,closeModal,closeModal1,searchbar,setSearchbar,dataUse,setDataUse,dataFilter,}=useContext(GlobalInfo)
     // console.log("Citiesass",cities)
     // console.log("filterATATAT",filterAr)
 
@@ -61,45 +61,35 @@ const allData = [...new Set(Data.map((curElem) => curElem.category))]
     const [items, setItems] = useState(Data)
 
     const route = useRoute()
-    const [isModalVisible1, setModalVisible1] = useState(false);
-    const [activeItem1, setActive1] = useState(false)
+    
+//     const [searchbar, setSearchbar] = useState("")
 
-    const openModal1 = (item) => {
-        setActive1(item || false)
-        setModalVisible1(true)
-    }
-    const closeModal1 = () => {
-        setActive1(false)
-        setModalVisible1(false)
-    }
-    const [searchbar, setSearchbar] = useState("")
+//     const [dataUse,setDataUse]=useState([])
+//     console.log("dataUse",dataUse)
+//     useEffect(() => {
+//         setDataUse(cities)
+//     }, [cities])
+//     const dataFilter = (e) => {
+//         const keyword = e;
 
-    const [dataUse,setDataUse]=useState([])
-    console.log("dataUse",dataUse)
-    useEffect(() => {
-        setDataUse(cities)
-    }, [cities])
-    const dataFilter = (e) => {
-        const keyword = e;
+//         if (keyword !== '') {
+//             const results = dataUse.filter((inputFilter) => {
+// console.log("i",inputFilter)
+//                 return inputFilter.name.toLowerCase().startsWith(keyword.toLowerCase()) 
+//             });
 
-        if (keyword !== '') {
-            const results = dataUse.filter((inputFilter) => {
-console.log("i",inputFilter)
-                return inputFilter.name.toLowerCase().startsWith(keyword.toLowerCase()) 
-            });
+//             setDataUse(results);
+//         } else {
+//             setDataUse(cities);
+//             console.log("cities", cities)
 
-            setDataUse(results);
-        } else {
-            setDataUse(cities);
-            console.log("cities", cities)
-
-        }
-    }
+//         }
+//     }
 
 
-    useEffect(() => {
-        dataFilter(searchbar);
-    }, [searchbar])
+//     useEffect(() => {
+//         dataFilter(searchbar);
+//     }, [searchbar])
 
     const spacing=20;
     const AVATAR_SIZE=20;
@@ -114,11 +104,11 @@ console.log("i",inputFilter)
                 <Header openModal={openModal} cities={cities} />
             
 <TouchableOpacity style={styles.searchSection}      onPress={openModal1}>
-    <Feather name="search" size={20} color="#000"/>
+    <Feather name="search" size={20} color="#000" style={{marginLeft:10}}/>
                  <TextInput
      style={styles.input}
      editable={false}
-
+     placeholder="Search location, locality, popular area, city"
      selectTextOnFocus={false}
       
         />
@@ -361,7 +351,7 @@ onRequestClose={() => {
 </View>
            
 <View style={styles.searchSection}     >
-    <Feather name="search" size={20} color="#000"/>
+    <Feather name="search" size={20} color="#000" style={{marginLeft:10}}/>
                  <TextInput
      style={styles.input}
      value={searchbar}
@@ -457,7 +447,7 @@ const styles=StyleSheet.create({
         paddingTop: 10,
         paddingRight: 10,
         paddingBottom: 10,
-        paddingLeft: 0,
+        paddingLeft: 10,
         backgroundColor: '#fff',
         color: '#424242',
     },

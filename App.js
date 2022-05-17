@@ -49,13 +49,6 @@ const App = () => {
   const [state, setState] = useState([])
   
 
-  // const contextValue = useMemo(() => ({
-  //   state,
-  //   setState,
-  // }), [state])
-
-  // console.log("state")
-
   const [city, setCity] = useState("Agra")
 
 
@@ -90,6 +83,49 @@ const App = () => {
         setModalVisible(false)
     }
 
+
+  const [isModalVisible1, setModalVisible1] = useState(false);
+  const [activeItem1, setActive1] = useState(false)
+
+  const openModal1 = (item) => {
+      setActive1(item || false)
+      setModalVisible1(true)
+  }
+  const closeModal1 = () => {
+      setActive1(false)
+      setModalVisible1(false)
+  }
+
+  const [searchbar, setSearchbar] = useState("")
+
+    const [dataUse,setDataUse]=useState([])
+    console.log("dataUse",dataUse)
+    useEffect(() => {
+        setDataUse(cities)
+    }, [cities])
+    const dataFilter = (e) => {
+        const keyword = e;
+
+        if (keyword !== '') {
+            const results = dataUse.filter((inputFilter) => {
+console.log("i",inputFilter)
+                return inputFilter.name.toLowerCase().startsWith(keyword.toLowerCase()) 
+            });
+
+            setDataUse(results);
+        } else {
+            setDataUse(cities);
+            console.log("cities", cities)
+
+        }
+    }
+
+
+    useEffect(() => {
+        dataFilter(searchbar);
+    }, [searchbar])
+
+
     const theme = {
       ...DefaultTheme,
       roundness: 2,
@@ -112,7 +148,20 @@ const App = () => {
     isModalVisible:isModalVisible,
     setModalVisible:setModalVisible,
     activeItem:activeItem,
-    setActive:setActive}}>
+    setActive:setActive,
+    isModalVisible1:isModalVisible1,
+    setModalVisible1:setModalVisible1,
+    activeItem1:activeItem1,
+    setActive1:setActive1,
+    openModal1:openModal1,
+    closeModal1:closeModal1,
+    searchbar:searchbar,
+    setSearchbar:setSearchbar,
+    dataUse:dataUse,
+    setDataUse:setDataUse,
+    dataFilter:dataFilter,
+    
+    }}>
       <PaperProvider theme={theme}>
       <NavigationContainer>
         <BottomTabNavigator  />

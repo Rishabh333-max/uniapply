@@ -102,6 +102,7 @@ console.log("i",inputFilter)
     }, [searchbar])
 
     const spacing=20;
+    const AVATAR_SIZE=20;
     return (
     
 
@@ -369,20 +370,48 @@ onRequestClose={() => {
       
         />
             </View>
-            <FlatList
+           { 
+           searchbar?
+           <FlatList
                             data={dataUse}
 
                             contentContainerStyle={{
-                                padding: spacing,
-                                paddingTop: StatusBar.currentHeight || 42
+                                paddingLeft:10,
+                                paddingRight:10
+                                // paddingTop: StatusBar.currentHeight || 42
                             }}
                             renderItem={(val) => {
                             
                                 console.log("vvxasdasdasadsadssadasd", val)
                                 return(
-<Text>{val.item.name}</Text>
+                                    <View>
+
+<TouchableOpacity style={{
+                                        flexDirection: "row", marginBottom: 2, backgroundColor: "white",
+                                        // elevation: 10,
+                                        // shadowColor: '#000',
+                                    }} >
+                                        <Image source={require('./Images/school.jpg')}
+                                            style={{
+                                                width: 40, height: 40, borderRadius: 40,
+                                               
+                                            }} />
+                                        <View>
+                                           <Text style={{ fontSize: 16, fontWeight: "400",marginTop:10 }}>{val.item.name}</Text>
+                                        </View>
+                                    </TouchableOpacity>
+                                    <View
+  style={{
+    borderBottomColor: 'grey',
+    borderBottomWidth: 1,
+  }}
+/>
+                                    </View>
+                                    
                                 )
-                            }}/>
+                            }}/>:
+                            <>
+                            </>}
         
             </View>
 </Modal>

@@ -42,7 +42,7 @@ export const Compare = () => {
 export const CompareSchools = () => {
     console.log('sdhdcbchjds')
     const {allDatas,setAllDatas,filterAr,setFilterAr,cities,setCities,filterMenu,openModal,openModal1,isModalVisible,isModalVisible1,activeItem,activeItem1,setActive,setActive1,setModalVisible,setModalVisible1,closeModal,closeModal1,searchbar,setSearchbar,dataUse,setDataUse,dataFilter,}=useContext(GlobalInfo)
-
+console.log("opentry",openModal1)
     return (
         <SafeAreaView style={{  flexDirection: "row",backgroundColor:"#e6e6fa",flex:1}}>
             <View style={styles.categoryItemWrapper}>

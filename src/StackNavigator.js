@@ -12,6 +12,9 @@ import {CompareSchools} from './Compare'
 import {PopularSchools} from './Compare'
 import { ManageChild, Modall } from "./ManageChild";
 import { CommonForm } from "./CommonForm";
+import { DocumentsRequired, EligibilityCriteria, SchoolProfile } from "./SchoolProfile";
+import { TotalCostModal } from "./TotalCostModal.js'";
+import { ShortListedStudent } from "./ShortListedStudent";
 // import { Header } from "./Header";
 
 
@@ -38,7 +41,11 @@ const MainStackNavigator = () => {
  
       <Stack.Screen name="CompareSchools" component={CompareSchools} options={{headerShown:false}} />
       <Stack.Screen name="PopularSchools" component={PopularSchools} options={{headerShown:false}}/>  
-     
+      <Stack.Screen name="SchoolProfile" component={SchoolProfile} options={{headerShown:false}}/>  
+      <Stack.Screen name="EligibilityCriteria" component={EligibilityCriteria} options={{headerShown:false}}/>
+      <Stack.Screen name="DocumentsRequired" component={DocumentsRequired} options={{headerShown:false}}/>
+      <Stack.Screen name="ShortListedStudent" component={ShortListedStudent} options={{headerShown:false}}/>
+ 
     </Stack.Navigator>
   );
 }

@@ -3,6 +3,7 @@ import React from "react";
 import { TouchableOpacity } from "react-native";
 import { Touchable } from "react-native";
 import { View, Text, Image } from "react-native";
+import { ShortListedStudent } from "./ShortListedStudent";
 
 export const Profile = () => {
    const navigation=useNavigation()
@@ -58,11 +59,12 @@ export const Profile = () => {
                 <View style={{ flexDirection: "row", backgroundColor: "white", justifyContent: 'space-between', marginTop: 10, alignItems: "center", paddingHorizontal: 20, paddingVertical: 7 }} >
                     <View style={{ flexDirection: "row", alignItems: "center", flex: 1 }}>
                         <Image source={require('./Images/heart.png')} style={{ height: 27, width: 27, }} />
-                        <Text style={{ fontSize: 16, marginHorizontal: 10 }}>Shortlisted Students</Text>
+                        <Text style={{ fontSize: 16, marginHorizontal: 10 }}>Shortlisted Schools</Text>
                     </View>
+                    <TouchableOpacity onPress={()=>navigation.navigate('ShortListedStudent')}>
                     <Image source={require('./Images/arrow-right.png')} style={{ height: 27, width: 27, }} />
 
-
+                    </TouchableOpacity>
                 </View>
                 <View style={{ flexDirection: "row", backgroundColor: "white", justifyContent: 'space-between', marginTop: 10, alignItems: "center", paddingHorizontal: 20, paddingVertical: 7 }} >
                     <View style={{ flexDirection: "row", alignItems: "center", flex: 1 }}>

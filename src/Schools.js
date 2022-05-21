@@ -16,14 +16,15 @@ export const Schools = ({route}) => {
     console.log("routes", route)
     const navigation = useNavigation()
  
-    const {allDatas,setAllDatas,filterAr,setFilterAr,cities,setCities,filterMenu,openModal,isModalVisible,activeItem,isActve,setModalVisible,closeModal}=useContext(GlobalInfo)
+    const {allDatas,setAllDatas,filterAr,setFilterAr,cities,setCities,filterMenu,openModal,isModalVisible,activeItem,isActve,setModalVisible,closeModal,dataUse}=useContext(GlobalInfo)
     // const [isModalVisible, setModalVisible] = useState(false);
     // const [activeItem, setActive] = useState(false)
+    console.log("ddsd",dataUse)
     const [searchbar, setSearchbar] = useState("")
     const [citi,setCiti]=useState(cities)
     const [upItems,setUpItems]=useState(Data.length)
-console.log("upItems",upItems)
-    console.log("citi",citi)
+// console.log("upItems",upItems)
+//     console.log("citi",citi)
 
 
     return (
@@ -37,7 +38,9 @@ console.log("upItems",upItems)
             <Text style={{paddingHorizontal:20,paddingVertical:20,fontSize:20,color:"black"}}>Schools in {cities?.[0]?.category}</Text>
                        {cities?.map((elem) => (
 
-<View style={{ margin: 10 }} key={elem.id} >
+<TouchableOpacity style={{ margin: 10 }} key={elem.id} onPress={() => navigation.navigate("SchoolProfile", {val:dataUse.map(val=>{
+return val;
+})})}>
 
     <Image source={{ uri: elem.imgUrl }} style={{ width: "100%", height: 170, }} />
     <Text numberOfLines={1} style={{ color: "black", fontWeight: "400", fontSize: 20, width: 290, color: "black" }}>{elem.name}</Text>
@@ -47,7 +50,7 @@ console.log("upItems",upItems)
     </View>
     <Text style={{ marginTop: 10, color: "black" }}>Classes:{elem.classes}</Text>
 
-</View>
+</TouchableOpacity>
 ))}
 
             </ScrollView>

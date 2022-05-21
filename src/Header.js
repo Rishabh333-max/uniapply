@@ -1,16 +1,22 @@
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
+import { useState } from "react";
 import { ScrollView } from "react-native";
 import { View,Text,Image,TouchableOpacity } from "react-native";
+import  AntDesign  from "react-native-vector-icons/AntDesign";
 
 export const Header=({openModal,cities,allData,})=>{
     // console.log("citiessss",cities)
     const navigation=useNavigation()
+    const [liked,setLiked]=useState(false)
     return(
         <ScrollView>
               <View style={{ flexDirection: "row" }}>
                     <TouchableOpacity style={{ flexDirection: "row" }} onPress={openModal}>
+                   
                         <Image source={require('./Images/placeholder.png')} style={{ height: 25, width: 25, marginLeft: 30, marginTop: 26 }} />
+                      
+               
                        
                         <Text style={{ marginTop: 26, marginLeft: 10, fontSize: 20 }}>{cities?.[0]?.category}</Text>
 

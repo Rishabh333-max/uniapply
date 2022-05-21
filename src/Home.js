@@ -1,5 +1,5 @@
-import React, { useEffect, useState,createContext } from "react";
-import { View, Text, TouchableOpacity, Image, Alert, ScrollView, Button,StyleSheet,TextInput,FlatList } from 'react-native'
+import React, { useEffect, useState, createContext } from "react";
+import { View, Text, TouchableOpacity, Image, Alert, ScrollView, Button, StyleSheet, TextInput, FlatList } from 'react-native'
 import EvilIcons from "react-native-vector-icons/EvilIcons";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
@@ -14,8 +14,9 @@ import { Header } from "./Header";
 import { AppProvider } from "./ContextData";
 import { useContext } from "react";
 import { GlobalInfo } from "../App";
-import  Feather  from "react-native-vector-icons/Feather";
+import Feather from "react-native-vector-icons/Feather";
 import { StatusBar } from "react-native";
+import  FontAwesome  from "react-native-vector-icons/FontAwesome";
 
 
 const allData = [...new Set(Data.map((curElem) => curElem.category))]
@@ -23,16 +24,48 @@ const allData = [...new Set(Data.map((curElem) => curElem.category))]
 // export const Citiesdata=createContext(cities)
 // console.log("all ", allData)
 
- export const Home = (props) => {
+export const Home = (props) => {
     const [categoryItems, setCatItems] = useState(allData)
     const navigation = useNavigation()
-
-    const {allDatas,setAllDatas,filterAr,setFilterAr,cities,setCities,filterMenu,openModal,openModal1,isModalVisible,isModalVisible1,activeItem,activeItem1,setActive,setActive1,setModalVisible,setModalVisible1,closeModal,closeModal1,searchbar,setSearchbar,dataUse,setDataUse,dataFilter,}=useContext(GlobalInfo)
+    const { allDatas, setAllDatas, filterAr, setFilterAr, cities, setCities, filterMenu, openModal, openModal1, openModal2, isModalVisible, isModalVisible1, isModalVisible2, activeItem, activeItem1, activeItem2, setActive, setActive1, setActive2, setModalVisible, setModalVisible1, setModalVisible2, closeModal, closeModal1, closeModal2, searchbar, setSearchbar, dataUse, setDataUse, dataFilter, dataUsage, setDataUsage,
+        openModal3,
+        closeModal3,
+        isModalVisible3,
+        setModalVisible3,
+        activeItem3,
+        setActive3,
+        spacing,
+        AVATAR_SIZE,
+        editItem,
+        isEditItem,
+        setIsEditItem,
+        toggleBtn,
+        setToggleBtn,
+        input,
+        setInput,
+        setSubmitData,
+        submitData,
+        onSubmit,
+        openModal4,
+        closeModal4,
+        isModalVisible4,
+        setModalVisible4,
+        activeItem4,
+        setActive4,
+    } = useContext(GlobalInfo)
+    console.log("kkkk", submitData)
+    const getData = () => {
+        const [dataaa, setDataaa] = useState('');
+        console.log("snbsbnas", dataaa)
+        setDataaa(val)
+    }
     // console.log("Citiesass",cities)
     // console.log("filterATATAT",filterAr)
 
+    const [tdata, setTdata] = useState("");
+
     const filterArray = cities;
- 
+
     useEffect(() => {
         setAllDatas(filterArray)
     }, [filterArray])
@@ -61,58 +94,33 @@ const allData = [...new Set(Data.map((curElem) => curElem.category))]
     const [items, setItems] = useState(Data)
 
     const route = useRoute()
-    
-//     const [searchbar, setSearchbar] = useState("")
-
-//     const [dataUse,setDataUse]=useState([])
-//     console.log("dataUse",dataUse)
-//     useEffect(() => {
-//         setDataUse(cities)
-//     }, [cities])
-//     const dataFilter = (e) => {
-//         const keyword = e;
-
-//         if (keyword !== '') {
-//             const results = dataUse.filter((inputFilter) => {
-// console.log("i",inputFilter)
-//                 return inputFilter.name.toLowerCase().startsWith(keyword.toLowerCase()) 
-//             });
-
-//             setDataUse(results);
-//         } else {
-//             setDataUse(cities);
-//             console.log("cities", cities)
-
-//         }
-//     }
 
 
-//     useEffect(() => {
-//         dataFilter(searchbar);
-//     }, [searchbar])
 
-    const spacing=20;
-    const AVATAR_SIZE=20;
+    console.log("activeItem2", activeItem2)
+    const [liked, setLiked] = useState(false)
+
+
     return (
-    
 
-   <>
-            <ScrollView style={{backgroundColor:"white"}}>
-            
-         
-              
+
+        <>
+            <ScrollView style={{ backgroundColor: "white" }}>
+
+
+
                 <Header openModal={openModal} cities={cities} />
-            
-<TouchableOpacity style={styles.searchSection}      onPress={openModal1}>
-    <Feather name="search" size={20} color="#000" style={{marginLeft:10}}/>
-                 <TextInput
-     style={styles.input}
-     editable={false}
-     placeholder="Search location, locality, popular area, city"
-     selectTextOnFocus={false}
-      
-        />
-            </TouchableOpacity>
+
+                <TouchableOpacity style={styles.searchSection} onPress={openModal1}>
+                    <Feather name="search" size={20} color="#000" style={{ marginLeft: 10 }} />
+                    <TextInput
+                        style={styles.input}
+                        editable={false}
+                        placeholder="Search location, locality, popular area, city"
+                        selectTextOnFocus={false}
+
+                    />
+                </TouchableOpacity>
                 <TouchableOpacity onPress={() => { showConfirmDialog() }}>
                     <Image source={require("./Images/1211.jpg")} style={{ width: "95%", height: 250, margin: 10 }} />
                 </TouchableOpacity >
@@ -136,10 +144,31 @@ const allData = [...new Set(Data.map((curElem) => curElem.category))]
                 </View>
                 <ScrollView horizontal={true}>
 
+{console.log("fffff",filterAr)}
+                    {filterAr.map((elem,index) => (
 
-                    {filterAr.map((elem) => (
+                    <TouchableOpacity style={{ margin: 10 }} key={elem.id} onPress={() => navigation.navigate("SchoolProfile",{mode:'add'}
+                     )}>
+                               <TouchableOpacity
+          onPress={() => {
+            console.log(liked);
+            if (liked.find(index)) {
+              let unlike = liked.filter((elem) => elem !== index);
+              setLiked(unlike);
+            } else {
+              setLiked([...liked, index]);
+            }
+          }}>
+          <View style={styles.list}>
+        
+            <FontAwesome
+              name="heart"
+              size={20}
+              style={{ color:  'black' }}
+            />
+          </View>
+        </TouchableOpacity>
 
-                        <View style={{ margin: 10 }} key={elem.id} >
 
                             <Image source={{ uri: elem.imgUrl }} style={{ width: "100%", height: 170, }} />
                             <Text numberOfLines={1} style={{ color: "black", fontWeight: "400", fontSize: 20, width: 290, color: "black" }}>{elem.name}</Text>
@@ -149,298 +178,293 @@ const allData = [...new Set(Data.map((curElem) => curElem.category))]
                             </View>
                             <Text style={{ marginTop: 10, color: "black" }}>Classes:{elem.classes}</Text>
 
-                        </View>
-                    ))}
+                        </TouchableOpacity>
+                          ))}
 
                 </ScrollView>
             </ScrollView>
-        
+
             <Modal
 
 
-animationType='slide'
-visible={isModalVisible}
-onRequestClose={() => {
-    setModalVisible(!isModalVisible)
-}}
-filterMenu={filterMenu}
->
-<ScrollView>
-    <View>
-        <View style={{ flexDirection: "row" }}>
-            <Text style={{ fontSize: 22, fontWeight: "400", color: "black", marginLeft: 20, marginTop: 12 }}>Search Location</Text>
-            <TouchableOpacity onPress={closeModal}>
-                <Image source={require("./Images/close.png")} style={{ height: 18, width: 18, marginTop: 20, marginLeft: 150 }} />
-            </TouchableOpacity>
-        </View>
-        <View >
-        <Searchbar
-            placeholder="Search location, locality, popular area, city"
-            // onChangeText={(text) => setSearchbar(text)}
-            // value={searchbar}
-            style={{ margin: 10, elevation: 20, shadowColor: "#000" }}
-            onPress={openModal1}
-            
-        />
-        </View>
-        <View style={{ marginTop: 20, height: 1, backgroundColor: 'black', width: "100%", color: "black" }} />
-        <Text style={{ marginTop: 20, fontSize: 20, color: "black", marginLeft: 15, fontWeight: "600" }}>Cities</Text>
-        <View style={{ display: 'flex', flexWrap: "wrap", flexDirection: "row" }} >
+                animationType='slide'
+                visible={isModalVisible}
+                onRequestClose={() => {
+                    setModalVisible(!isModalVisible)
+                }}
+                filterMenu={filterMenu}
+            >
+                <ScrollView>
+                    <View>
+                        <View style={{ flexDirection: "row" }}>
+                            <Text style={{ fontSize: 22, fontWeight: "400", color: "black", marginLeft: 20, marginTop: 12 }}>Search Location</Text>
+                            <TouchableOpacity onPress={closeModal}>
+                                <Image source={require("./Images/close.png")} style={{ height: 18, width: 18, marginTop: 20, marginLeft: 150 }} />
+                            </TouchableOpacity>
+                        </View>
+                        <View >
+                            <Searchbar
+                                placeholder="Search location, locality, popular area, city"
+                                // onChangeText={(text) => setSearchbar(text)}
+                                // value={searchbar}
+                                style={{ margin: 10, elevation: 20, shadowColor: "#000" }}
+                                onPress={openModal1}
 
-            <TouchableOpacity onPress={() => { filterMenu("Agra"); setModalVisible(!isModalVisible) }} style={{ backgroundColor: "white", height: 120, width: 120, marginBottom: 10, marginLeft: 10 }}
+                            />
+                        </View>
+                        <View style={{ marginTop: 20, height: 1, backgroundColor: 'black', width: "100%", color: "black" }} />
+                        <Text style={{ marginTop: 20, fontSize: 20, color: "black", marginLeft: 15, fontWeight: "600" }}>Cities</Text>
+                        <View style={{ display: 'flex', flexWrap: "wrap", flexDirection: "row" }} >
+
+                            <TouchableOpacity onPress={() => { filterMenu("Agra"); setModalVisible(!isModalVisible) }} style={{ backgroundColor: "white", height: 120, width: 120, marginBottom: 10, marginLeft: 10 }}
+                            >
+
+                                <Image source={require("./Images/tajmahal.jpeg")}
+
+                                    style={{ height: 80, width: 80, color: "black", marginLeft: 26 }}
+                                />
+
+                                <Text style={{ marginLeft: 40, color: "black" }}>Agra</Text>
+                            </TouchableOpacity>
+
+
+                            <TouchableOpacity onPress={() => { filterMenu("Delhi"); setModalVisible(!isModalVisible) }} style={{ backgroundColor: "white", height: 120, width: 120, marginBottom: 10, marginLeft: 10 }}
+                            >
+
+                                <Image source={require('./Images/indiagate.webp')}
+
+                                    style={{ height: 80, width: 80, color: "black", marginLeft: 26 }}
+                                />
+
+                                <Text style={{ marginLeft: 40, color: "black" }}>Delhi</Text>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity onPress={() => { filterMenu("Gurugram"); setModalVisible(!isModalVisible) }} style={{ backgroundColor: "white", height: 120, width: 120, marginBottom: 10, marginLeft: 10 }}
+                            >
+
+                                <Image source={require("./Images/download.png")}
+
+                                    style={{ height: 80, width: 80, color: "black", marginLeft: 26 }}
+                                />
+
+                                <Text style={{ marginLeft: 40, color: "black" }}>Gurugram</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => { filterMenu("Mathura"); setModalVisible(!isModalVisible) }} style={{ backgroundColor: "white", height: 120, width: 120, marginBottom: 10, marginLeft: 10 }}
+                            >
+
+                                <Image source={require('./Images/krishna.jpg')}
+
+                                    style={{ height: 80, width: 80, color: "black", marginLeft: 26 }}
+                                />
+
+                                <Text style={{ marginLeft: 40, color: "black" }}>Mathura</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => { filterMenu("Pune"); setModalVisible(!isModalVisible) }} style={{ backgroundColor: "white", height: 120, width: 120, marginBottom: 10, marginLeft: 10 }}
+                            >
+
+                                <Image source={require('./Images/pune.jpeg')}
+
+                                    style={{ height: 80, width: 80, color: "black", marginLeft: 26 }}
+                                />
+
+                                <Text style={{ marginLeft: 40, color: "black" }}>Pune</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => { filterMenu("Thane"); setModalVisible(!isModalVisible) }} style={{ backgroundColor: "white", height: 120, width: 120, marginBottom: 10, marginLeft: 10 }}
+                            >
+
+                                <Image source={require('./Images/thane.webp')}
+
+                                    style={{ height: 80, width: 80, color: "black", marginLeft: 26 }}
+                                />
+
+                                <Text style={{ marginLeft: 40, color: "black" }}>Thane</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => { filterMenu("Ghaziabad"); setModalVisible(!isModalVisible) }} style={{ backgroundColor: "white", height: 120, width: 120, marginBottom: 10, marginLeft: 10 }}
+                            >
+
+                                <Image source={require('./Images/ghaziabad.webp')}
+
+                                    style={{ height: 80, width: 80, color: "black", marginLeft: 26 }}
+                                />
+
+                                <Text style={{ marginLeft: 40, color: "black" }}>Ghaziabad</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => { filterMenu("Vadodra"); setModalVisible(!isModalVisible) }} style={{ backgroundColor: "white", height: 120, width: 120, marginBottom: 10, marginLeft: 10 }}
+                            >
+
+                                <Image source={require('./Images/vadodra.webp')}
+
+                                    style={{ height: 80, width: 80, color: "black", marginLeft: 26 }}
+                                />
+
+                                <Text style={{ marginLeft: 40, color: "black" }}>Vadodra</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => { filterMenu("Banglore"); setModalVisible(!isModalVisible) }} style={{ backgroundColor: "white", height: 120, width: 120, marginBottom: 10, marginLeft: 10 }}
+                            >
+
+                                <Image source={require('./Images/banglore.jpg')}
+
+                                    style={{ height: 80, width: 80, color: "black", marginLeft: 26 }}
+                                />
+
+                                <Text style={{ marginLeft: 40, color: "black" }}>Banglore</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => { filterMenu("Nagpur"); setModalVisible(!isModalVisible) }} style={{ backgroundColor: "white", height: 120, width: 120, marginBottom: 10, marginLeft: 10 }}
+                            >
+
+                                <Image source={require('./Images/nagpur.jpeg')}
+
+                                    style={{ height: 80, width: 80, color: "black", marginLeft: 26 }}
+                                />
+
+                                <Text style={{ marginLeft: 40, color: "black" }}>Nagpur</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => { filterMenu("Navi Mumbai"); setModalVisible(!isModalVisible) }} style={{ backgroundColor: "white", height: 120, width: 120, marginBottom: 10, marginLeft: 10 }}
+                            >
+
+                                <Image source={require('./Images/navimumbai.png')}
+
+                                    style={{ height: 80, width: 80, color: "black", marginLeft: 26 }}
+                                />
+
+                                <Text style={{ marginLeft: 40, color: "black" }}>Navi Mumbai</Text>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity onPress={() => { filterMenu("Nashik"); setModalVisible(!isModalVisible) }} style={{ backgroundColor: "white", height: 120, width: 120, marginBottom: 10, marginLeft: 10 }}
+                            >
+
+                                <Image source={require('./Images/nashik.webp')}
+
+                                    style={{ height: 80, width: 80, color: "black", marginLeft: 26 }}
+                                />
+
+                                <Text style={{ marginLeft: 40, color: "black" }}>Nashik</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => { filterMenu("Mumbai"); setModalVisible(!isModalVisible) }} style={{ backgroundColor: "white", height: 120, width: 120, marginBottom: 10, marginLeft: 10 }}
+                            >
+
+                                <Image source={require('./Images/mumbai.png')}
+
+                                    style={{ height: 80, width: 80, color: "black", marginLeft: 26 }}
+                                />
+
+                                <Text style={{ marginLeft: 40, color: "black" }}>Mumbai</Text>
+                            </TouchableOpacity>
+
+
+
+                        </View>
+                    </View>
+
+                </ScrollView>
+
+            </Modal>
+            <Modal
+                animationType='slide'
+                visible={isModalVisible1}
+                onRequestClose={() => {
+                    setModalVisible1(!isModalVisible1)
+                }}
             >
 
-                <Image source={require("./Images/tajmahal.jpeg")}
+                <View>
+                    <View >
+                        <Header openModal={openModal} cities={cities} />
+                    </View>
 
-                    style={{ height: 80, width: 80, color: "black", marginLeft: 26 }}
-                />
+                    <View style={styles.searchSection}     >
+                        <Feather name="search" size={20} color="#000" style={{ marginLeft: 10 }} />
+                        <TextInput
+                            style={styles.input}
+                            value={searchbar}
+                            onChangeText={(newVal) => setSearchbar(newVal)}
+                            placeholder="Which School are you looking?"
 
-                <Text style={{ marginLeft: 40, color: "black" }}>Agra</Text>
-            </TouchableOpacity>
+                        />
+                    </View>
+                    {
+                        searchbar ?
+                            <FlatList
+                                data={dataUse}
 
-
-            <TouchableOpacity onPress={() => { filterMenu("Delhi"); setModalVisible(!isModalVisible) }} style={{ backgroundColor: "white", height: 120, width: 120, marginBottom: 10, marginLeft: 10 }}
-            >
-
-                <Image source={require('./Images/indiagate.webp')}
-
-                    style={{ height: 80, width: 80, color: "black", marginLeft: 26 }}
-                />
-
-                <Text style={{ marginLeft: 40, color: "black" }}>Delhi</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => { filterMenu("Gurugram"); setModalVisible(!isModalVisible) }} style={{ backgroundColor: "white", height: 120, width: 120, marginBottom: 10, marginLeft: 10 }}
-            >
-
-                <Image source={require("./Images/download.png")}
-
-                    style={{ height: 80, width: 80, color: "black", marginLeft: 26 }}
-                />
-
-                <Text style={{ marginLeft: 40, color: "black" }}>Gurugram</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { filterMenu("Mathura"); setModalVisible(!isModalVisible) }} style={{ backgroundColor: "white", height: 120, width: 120, marginBottom: 10, marginLeft: 10 }}
-            >
-
-                <Image source={require('./Images/krishna.jpg')}
-
-                    style={{ height: 80, width: 80, color: "black", marginLeft: 26 }}
-                />
-
-                <Text style={{ marginLeft: 40, color: "black" }}>Mathura</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { filterMenu("Pune"); setModalVisible(!isModalVisible) }} style={{ backgroundColor: "white", height: 120, width: 120, marginBottom: 10, marginLeft: 10 }}
-            >
-
-                <Image source={require('./Images/pune.jpeg')}
-
-                    style={{ height: 80, width: 80, color: "black", marginLeft: 26 }}
-                />
-
-                <Text style={{ marginLeft: 40, color: "black" }}>Pune</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { filterMenu("Thane"); setModalVisible(!isModalVisible) }} style={{ backgroundColor: "white", height: 120, width: 120, marginBottom: 10, marginLeft: 10 }}
-            >
-
-                <Image source={require('./Images/thane.webp')}
-
-                    style={{ height: 80, width: 80, color: "black", marginLeft: 26 }}
-                />
-
-                <Text style={{ marginLeft: 40, color: "black" }}>Thane</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { filterMenu("Ghaziabad"); setModalVisible(!isModalVisible) }} style={{ backgroundColor: "white", height: 120, width: 120, marginBottom: 10, marginLeft: 10 }}
-            >
-
-                <Image source={require('./Images/ghaziabad.webp')}
-
-                    style={{ height: 80, width: 80, color: "black", marginLeft: 26 }}
-                />
-
-                <Text style={{ marginLeft: 40, color: "black" }}>Ghaziabad</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { filterMenu("Vadodra"); setModalVisible(!isModalVisible) }} style={{ backgroundColor: "white", height: 120, width: 120, marginBottom: 10, marginLeft: 10 }}
-            >
-
-                <Image source={require('./Images/vadodra.webp')}
-
-                    style={{ height: 80, width: 80, color: "black", marginLeft: 26 }}
-                />
-
-                <Text style={{ marginLeft: 40, color: "black" }}>Vadodra</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { filterMenu("Banglore"); setModalVisible(!isModalVisible) }} style={{ backgroundColor: "white", height: 120, width: 120, marginBottom: 10, marginLeft: 10 }}
-            >
-
-                <Image source={require('./Images/banglore.jpg')}
-
-                    style={{ height: 80, width: 80, color: "black", marginLeft: 26 }}
-                />
-
-                <Text style={{ marginLeft: 40, color: "black" }}>Banglore</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { filterMenu("Nagpur"); setModalVisible(!isModalVisible) }} style={{ backgroundColor: "white", height: 120, width: 120, marginBottom: 10, marginLeft: 10 }}
-            >
-
-                <Image source={require('./Images/nagpur.jpeg')}
-
-                    style={{ height: 80, width: 80, color: "black", marginLeft: 26 }}
-                />
-
-                <Text style={{ marginLeft: 40, color: "black" }}>Nagpur</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { filterMenu("Navi Mumbai"); setModalVisible(!isModalVisible) }} style={{ backgroundColor: "white", height: 120, width: 120, marginBottom: 10, marginLeft: 10 }}
-            >
-
-                <Image source={require('./Images/navimumbai.png')}
-
-                    style={{ height: 80, width: 80, color: "black", marginLeft: 26 }}
-                />
-
-                <Text style={{ marginLeft: 40, color: "black" }}>Navi Mumbai</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => { filterMenu("Nashik"); setModalVisible(!isModalVisible) }} style={{ backgroundColor: "white", height: 120, width: 120, marginBottom: 10, marginLeft: 10 }}
-            >
-
-                <Image source={require('./Images/nashik.webp')}
-
-                    style={{ height: 80, width: 80, color: "black", marginLeft: 26 }}
-                />
-
-                <Text style={{ marginLeft: 40, color: "black" }}>Nashik</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { filterMenu("Mumbai"); setModalVisible(!isModalVisible) }} style={{ backgroundColor: "white", height: 120, width: 120, marginBottom: 10, marginLeft: 10 }}
-            >
-
-                <Image source={require('./Images/mumbai.png')}
-
-                    style={{ height: 80, width: 80, color: "black", marginLeft: 26 }}
-                />
-
-                <Text style={{ marginLeft: 40, color: "black" }}>Mumbai</Text>
-            </TouchableOpacity>
-
-
-
-        </View>
-    </View>
-
-</ScrollView>
-
-</Modal>
-<Modal 
-animationType='slide'
-visible={isModalVisible1}
-onRequestClose={() => {
-    setModalVisible1(!isModalVisible1)
-}}
->
-        {/* <Searchbar
-                disable={true}
-                    placeholder="Which School are you looking?"
-                    onChangeText={(text) => setSearchbar(text)}
-                    value={searchbar}
-                    onPress={openModal1}
-                    style={{ margin: 10, elevation: 2 }}
-                /> */}
-    <View>
-    <View >
-<Header openModal={openModal} cities={cities} />
-</View>
-           
-<View style={styles.searchSection}     >
-    <Feather name="search" size={20} color="#000" style={{marginLeft:10}}/>
-                 <TextInput
-     style={styles.input}
-     value={searchbar}
-     onChangeText={(newVal) => setSearchbar(newVal)}
-     placeholder="Which School are you looking?"
-      
-        />
-            </View>
-           { 
-           searchbar?
-           <FlatList
-                            data={dataUse}
-
-                            contentContainerStyle={{
-                                paddingLeft:10,
-                                paddingRight:10
-                                // paddingTop: StatusBar.currentHeight || 42
-                            }}
-                            renderItem={(val) => {
-                            
-                                console.log("vvxasdasdasadsadssadasd", val)
-                                return(
-                                    <View>
-
-<TouchableOpacity style={{
-                                        flexDirection: "row", marginBottom: 2, backgroundColor: "white",
-                                        // elevation: 10,
-                                        // shadowColor: '#000',
-                                    }} >
-                                        <Image source={require('./Images/school.jpg')}
-                                            style={{
-                                                width: 40, height: 40, borderRadius: 40,
-                                               
-                                            }} />
+                                contentContainerStyle={{
+                                    paddingLeft: 10,
+                                    paddingRight: 10
+                                    // paddingTop: StatusBar.currentHeight || 42
+                                }}
+                                renderItem={(val) => {
+                                    const valll = val;
+                                    console.log("vvxasdasdasadsadssadasd", val)
+                                    return (
                                         <View>
-                                           <Text style={{ fontSize: 16, fontWeight: "400",marginTop:10 }}>{val.item.name}</Text>
+
+                                            <TouchableOpacity style={{
+                                                flexDirection: "row", marginBottom: 2, backgroundColor: "white",
+                                                // elevation: 10,
+                                                // shadowColor: '#000',
+                                            }} onPress={() => navigation.navigate("SchoolProfile", { val })}>
+                                                <Image source={require('./Images/school.jpg')}
+                                                    style={{
+                                                        width: 40, height: 40, borderRadius: 40,
+
+                                                    }} />
+                                                <View>
+                                                    <Text style={{ fontSize: 16, fontWeight: "400", marginTop: 10 }} >{val.item.name}</Text>
+                                                </View>
+                                            </TouchableOpacity>
+                                            <View
+                                                style={{
+                                                    borderBottomColor: 'grey',
+                                                    borderBottomWidth: 1,
+                                                }}
+                                            />
                                         </View>
-                                    </TouchableOpacity>
-                                    <View
-  style={{
-    borderBottomColor: 'grey',
-    borderBottomWidth: 1,
-  }}
-/>
-                                    </View>
-                                    
-                                )
-                            }}/>:
+
+                                    )
+                                }} /> :
                             <>
                             </>}
-        
-            </View>
-</Modal>
-</>
-         
-          
 
-                
+                </View>
+            </Modal>
+
+
+        </>
+
+
+
+
     )
 }
 export default Home;
 
-const styles=StyleSheet.create({
+const styles = StyleSheet.create({
     searchBar: {
         fontSize: 24,
         margin: 10,
         width: '90%',
         height: 50,
         backgroundColor: '#fff',
-        borderColor:"grey",
-        borderWidth:1,
-        shadowColor:"black",
-        elevation:10
-      },
-      searchSection: {
-      margin:20,
-     
+        borderColor: "grey",
+        borderWidth: 1,
+        shadowColor: "black",
+        elevation: 10
+    },
+    searchSection: {
+        margin: 20,
+
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#fff',
-        borderColor:"grey",
-        borderWidth:1,
-        shadowColor:"black",
-        elevation:10
+        borderColor: "grey",
+        borderWidth: 1,
+        shadowColor: "black",
+        elevation: 10
     },
     searchIcon: {
         padding: 10,
-        marginLeft:20
+        marginLeft: 20
     },
     input: {
         flex: 1,
@@ -451,7 +475,7 @@ const styles=StyleSheet.create({
         backgroundColor: '#fff',
         color: '#424242',
     },
-  
+
 })
 
 

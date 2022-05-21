@@ -473,17 +473,32 @@ import AntIcon from "react-native-vector-icons/AntDesign";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { useEffect } from "react";
 import { StatusBar } from "react-native";
+import { GlobalInfo } from "../App";
+import { useContext } from "react";
 
 export const ManageChild = (props) => {
-    // const submitData = props.route?.params?.submitData
-    // const toggleBtn=props.route?.params?.toggleBtn
-    // const setToggleBtn=props.route?.params?.setToggleBtn
-    // const input=props.route?.params?.input
-    // const setInput=props.route?.params?.setInput
-
-    // console.log("kjshjsdds", submitData)
 
 
+    const { allDatas, setAllDatas, filterAr, setFilterAr, cities, setCities, filterMenu, openModal, openModal1, openModal2, isModalVisible, isModalVisible1, isModalVisible2, activeItem, activeItem1, activeItem2, setActive, setActive1, setActive2, setModalVisible, setModalVisible1, setModalVisible2, closeModal, closeModal1, closeModal2, searchbar, setSearchbar, dataUse, setDataUse, dataFilter, dataUsage, setDataUsage, 
+         openModal3,
+        closeModal3,
+        isModalVisible3,
+        setModalVisible3,
+        activeItem3,
+        setActive3,
+        spacing,
+        AVATAR_SIZE,
+         editItem,
+         isEditItem,
+         setIsEditItem,
+         toggleBtn,
+         setToggleBtn,
+         input,
+         setInput,
+         setSubmitData,
+         submitData,
+         onSubmit
+    } = useContext(GlobalInfo)
     const [newEntry, setNewEntry] = useState([])
 
     const [date, setDate] = useState(new Date(1598051730000));
@@ -506,99 +521,101 @@ export const ManageChild = (props) => {
         showMode('date');
     };
 
-    const [input, setInput] = useState({
-        name: "",
-        email: "",
-        gender: "",
-        class: "",
-        dates: ""
-    })
-    const [submitData, setSubmitData] = useState([])
+    // const [input, setInput] = useState({
+    //     name: "",
+    //     email: "",
+    //     gender: "",
+    //     class: "",
+    //     dates: ""
+    // })
+    // const [submitData, setSubmitData] = useState([])
 
-    const onSubmit = () => {
-        const inputDataId = { id: new Date().getTime().toString(), input }
-        // const newData={input:input}
-        // console.log("newData",newData)
-        // setSubmitData([...submitData,input])
-        setSubmitData([...submitData, inputDataId])
-        setInput("")
-        setModalVisible(!isModalVisible)
-        // console.log("submitdata",name)
-    }
+    // const onSubmit = () => {
+    //     const inputDataId = { id: new Date().getTime().toString(), input }
+    //     // const newData={input:input}
+    //     // console.log("newData",newData)
+    //     // setSubmitData([...submitData,input])
+    //     setSubmitData([...submitData, inputDataId])
+    //     setInput("")
+    //     setModalVisible(!isModalVisible)
+    //     // console.log("submitdata",name)
+    // }
 
-    // useEffect(() => {
-    //     navigation.push("ManageChild", { submitData,toggleBtn,setToggleBtn,input,setInput, })
-    // }, [submitData])
+    // // useEffect(() => {
+    // //     navigation.push("ManageChild", { submitData,toggleBtn,setToggleBtn,input,setInput, })
+    // // }, [submitData])
 
-    const [toggleBtn, setToggleBtn] = useState(true);
-    const [isModalVisible, setModalVisible] = useState(false);
-    const [activeItem, setActive] = useState(false)
+    // const [toggleBtn, setToggleBtn] = useState(true);
+    // const [isModalVisible, setModalVisible] = useState(false);
+    // const [activeItem, setActive] = useState(false)
+    // const[isEditItem,setIsEditItem]=useState(null)
 
-    const openModal = (item) => {
-        setActive(item || false)
-        setModalVisible(true)
-    }
-    const closeModal = () => {
-        setActive(false)
-        setModalVisible(false)
-    }
+    // const openModal = (item) => {
+    //     setActive(item || false)
+    //     setModalVisible(true)
+    //     setInput('')
+    //        setToggleBtn(true)
+    // }
+    // const closeModal = () => {
+    //     setActive(false)
+    //     setModalVisible(false)
+    // }
 
-    const navigation = useNavigation()
-    const spacing = 20
-    const AVATAR_SIZE = 70;
-
-
-// const [storeData,setStoreData]=useState(newEditItem)
-// console.log('ssnbd',storeData)
-    const editItem = (id) => {
-        console.log("id", id)
-
-        let newEditItem = submitData.find((elem) => {
-            console.log(":testelem", elem)
-            return elem.id === id
-        })
-
-        console.log("./.hkjh", newEditItem)
-     
-        // useEffect(() => {
-        //     if (item)
-        //         setInput({
-        //             name: elem.input.name,
-        //             class: elem.input.class,
-        //             gender: elem.input.gender,
-        //             dates: elem.input.dates,
-        //             email: elem.input.email,
-            
-    
-        //         })
-        //     else {
-        //         setInput({
-        //             name: '',
-        //             class: '',
-        //             dates: '',
-        //             gender: '',
-                  
-        //             email: '',
-        //         })
-        //     }
-        //     // setFormErrors({})
-        // }, [elem])
-
-        // setInput(newEditItem)
-    }
-
-   
+    // const navigation = useNavigation()
+    // const spacing = 20
+    // const AVATAR_SIZE = 70;
 
 
+    // // const [storeData,setStoreData]=useState(newEditItem)
+    // // console.log('ssnbd',storeData)
+    // const editItem = (ids) => {
+    //     console.log("ids", ids)
+
+    //     let newEditItem = submitData.find((elem) => {
+    //         console.log(":testelem", elem)
+    //         return elem.id === ids.item.id
+    //     })
+
+    // setToggleBtn(false)
+    //     if (newEditItem?.item?.id !== '')  {
+    //         setInput({
+    //             name: ids.item.input.name,
+    //             email: ids.item.input.email,
+    //             gender: ids.item.input.gender,
+    //             class: ids.item.input.class,
+    //             dates:ids.item.input.dates
+
+    //         })
+    //     }
 
 
-//     })
+    //     else {
+    //         {console.log("123", newEditItem)}
+    //         setInput({
+    //             name: input.name,
+    //             email: input.email,
+    //             gender: input.gender,
+    //             class: input.class,
+    //             dates:input.dates
+
+    //         })
+    //     }
+    //     setIsEditItem(ids)
+
+    // }
+
+
+
+
+
+
+
     return (
         <>
             <ScrollView>
                 <View style={{ flex: 1, backgroundColor: "#fff" }}>
                     <View   >
-                        <Feather name="plus-circle" color="black" size={30} onPress={() => openModal()} />
+                        <Feather name="plus-circle" color="black" size={30} onPress={() => openModal3()} />
 
                     </View>
                     <View>
@@ -618,7 +635,8 @@ export const ManageChild = (props) => {
                                         flexDirection: "row", padding: spacing, marginBottom: spacing, borderRadius: 16, backgroundColor: "white",
                                         elevation: 10,
                                         shadowColor: '#000',
-                                    }} key={val.id} onPress={() => {editItem(val.item.id); setModalVisible(true)}}>
+                                        // }} key={val.id} onPress={() => {editItem(val.item.id); setModalVisible(true)}}>
+                                    }} key={val.id} onPress={() => { editItem(val); setModalVisible3(true) }}>
                                         <Image source={require('./Images/man.png')}
                                             style={{
                                                 width: AVATAR_SIZE, height: AVATAR_SIZE, borderRadius: AVATAR_SIZE,
@@ -643,9 +661,9 @@ export const ManageChild = (props) => {
 
                 transparent={true}
                 animationType='slide'
-                visible={isModalVisible}
+                visible={isModalVisible3}
                 onRequestClose={() => {
-                    setModalVisible(!isModalVisible)
+                    setModalVisible3(!isModalVisible3)
                 }}
             >
                 <ScrollView>
@@ -654,17 +672,12 @@ export const ManageChild = (props) => {
                         <TextInput
                             style={styles.inputStyle}
                             placeholder="What is your Child's Full Name?*"
-                            // mode='outlined'
-                            // label='Course Name'
-                            // outlineColor='#272643'
-                            // id="courseName"
+                      
                             value={input?.name}
 
-                            // onChangeText={(text) => setInput({ ...input, name: text })}
+           
                             onChangeText={(text) => { setInput({ ...input, name: text }) }}
-                        // activeOutlineColor='#272643'
-                        // backgroundColor='#E7E6FC'
-
+              
                         />
                         <Text style={styles.labels}>Email</Text>
                         <TextInput
@@ -785,7 +798,12 @@ export const ManageChild = (props) => {
 
                             </SelectPicker>
                         </View>
-                        <Button title="Save" onPress={() =>{ onSubmit([submitData]); }} />
+                        {
+                            toggleBtn ?
+                                <Button title="Save" onPress={() => { onSubmit([submitData]); }} /> :
+                                <Button title="Update" onPress={() => { onSubmit([submitData]); }} />
+                        }
+
                         {/* {
             toggleBtn?
             <Button title="Save" onPress={() => onSubmit([submitData])} />:

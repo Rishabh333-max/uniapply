@@ -16,7 +16,6 @@ import { useContext } from "react";
 import { GlobalInfo } from "../App";
 import Feather from "react-native-vector-icons/Feather";
 import { StatusBar } from "react-native";
-import  FontAwesome  from "react-native-vector-icons/FontAwesome";
 
 
 const allData = [...new Set(Data.map((curElem) => curElem.category))]
@@ -62,6 +61,7 @@ export const Home = (props) => {
     // console.log("Citiesass",cities)
     // console.log("filterATATAT",filterAr)
 
+
     const [tdata, setTdata] = useState("");
 
     const filterArray = cities;
@@ -98,9 +98,6 @@ export const Home = (props) => {
 
 
     console.log("activeItem2", activeItem2)
-    const [liked, setLiked] = useState(false)
-
-
     return (
 
 
@@ -145,30 +142,10 @@ export const Home = (props) => {
                 <ScrollView horizontal={true}>
 
 {console.log("fffff",filterAr)}
-                    {filterAr.map((elem,index) => (
+                    {filterAr.map((elem) => (
 
-                    <TouchableOpacity style={{ margin: 10 }} key={elem.id} onPress={() => navigation.navigate("SchoolProfile",{mode:'add'}
-                     )}>
-                               <TouchableOpacity
-          onPress={() => {
-            console.log(liked);
-            if (liked.find(index)) {
-              let unlike = liked.filter((elem) => elem !== index);
-              setLiked(unlike);
-            } else {
-              setLiked([...liked, index]);
-            }
-          }}>
-          <View style={styles.list}>
-        
-            <FontAwesome
-              name="heart"
-              size={20}
-              style={{ color:  'black' }}
-            />
-          </View>
-        </TouchableOpacity>
-
+                    <View style={{ margin: 10 }} key={elem.id} >
+                        {/* {console.log("dddd",e)} */}
 
                             <Image source={{ uri: elem.imgUrl }} style={{ width: "100%", height: 170, }} />
                             <Text numberOfLines={1} style={{ color: "black", fontWeight: "400", fontSize: 20, width: 290, color: "black" }}>{elem.name}</Text>
@@ -178,7 +155,7 @@ export const Home = (props) => {
                             </View>
                             <Text style={{ marginTop: 10, color: "black" }}>Classes:{elem.classes}</Text>
 
-                        </TouchableOpacity>
+                        </View>
                           ))}
 
                 </ScrollView>

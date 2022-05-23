@@ -268,6 +268,22 @@ const App = () => {
 
   const [wish,setWish]=useState(dataUse)
   console.log('whisj',wish)
+
+  const [cartItems,setCartItems]=useState([]);
+  const wishlist=(product)=>{
+      console.log("or",product)
+      const ProductExist=cartItems.find((item)=>item.id === product.id);
+      if(ProductExist){
+          setCartItems(cartItems.map(item=>item.id === product.id?
+          {...ProductExist,}:item));
+      }
+      else if(!ProductExist){
+        setCartItems([...cartItems,{...product}])
+      }
+      // else{
+// setCartItems([cartItems,{...product}])
+//       }
+  }
   return (
     <GlobalInfo.Provider value={{
       allDatas: allDatas,
@@ -339,6 +355,7 @@ const App = () => {
       setActive5: setActive5,
 
       wish:wish,setWish:setWish,
+      wishlist:wishlist
     }}>
       <PaperProvider theme={theme}>
         <NavigationContainer>

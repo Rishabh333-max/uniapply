@@ -38,9 +38,7 @@ export const Schools = ({route}) => {
             <Text style={{paddingHorizontal:20,paddingVertical:20,fontSize:20,color:"black"}}>Schools in {cities?.[0]?.category}</Text>
                        {cities?.map((elem) => (
 
-<TouchableOpacity style={{ margin: 10 }} key={elem.id} onPress={() => navigation.navigate("SchoolProfile", {val:dataUse.map(val=>{
-return val;
-})})}>
+<TouchableOpacity style={{ margin: 10 }} key={elem.id} onPress={() => navigation.navigate("SchoolProfile", {val:dataUse.filter((val)=>val.id==elem.id),mode:"Rishabh"})}>
 
     <Image source={{ uri: elem.imgUrl }} style={{ width: "100%", height: 170, }} />
     <Text numberOfLines={1} style={{ color: "black", fontWeight: "400", fontSize: 20, width: 290, color: "black" }}>{elem.name}</Text>

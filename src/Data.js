@@ -37,7 +37,8 @@ export const Data = [
         SchoolTiming: "07:40AM TO 12:30PM",
         officeTiming: "NA",
         TotalCost: "₹1,23,925",
-        MonthyCost: "₹10,309"
+        MonthyCost: "₹10,309",
+        liked:false
 
     },
     {

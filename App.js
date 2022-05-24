@@ -8,15 +8,7 @@
 
 import React, { createContext } from 'react';
 
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+
 
 import {
   Colors,
@@ -34,6 +26,16 @@ import { Application } from './src/Application';
 import { MainStackNavigator } from './src/StackNavigator';
 import BottomTabNavigator from './src/TabNavigator';
 import 'react-native-gesture-handler';
+import {
+  SafeAreaView,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  useColorScheme,
+  View,
+  TextInput
+} from 'react-native';
 // import Citiesdata from './src/ContextData';
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -284,6 +286,18 @@ const App = () => {
 // setCartItems([cartItems,{...product}])
 //       }
   }
+  const [isModalVisible7, setModalVisible7] = useState(false);
+  const [activeItem7, setActive7] = useState(false)
+  const openModal7 = (item) => {
+    console.log("iteeeeem", dataUse)
+    setActive7(item || false)
+    setModalVisible7(true)
+    setDataUsage(dataUsage)
+  }
+  const closeModal7 = () => {
+    setActive7(false)
+    setModalVisible7(false)
+  }
   return (
     <GlobalInfo.Provider value={{
       allDatas: allDatas,
@@ -355,7 +369,14 @@ const App = () => {
       setActive5: setActive5,
 
       wish:wish,setWish:setWish,
-      wishlist:wishlist
+      wishlist:wishlist,
+
+      openModal7:openModal7,
+      closeModal7: closeModal7,
+      isModalVisible7: isModalVisible7,
+      setModalVisible7: setModalVisible7,
+      activeItem7: activeItem7,
+      setActive7: setActive7,
     }}>
       <PaperProvider theme={theme}>
         <NavigationContainer>

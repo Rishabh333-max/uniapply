@@ -1,7 +1,7 @@
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import React from "react";
 import { useContext, useState } from "react";
-import { View, Text, ScrollView, TouchableOpacity, Image, Modal, SafeAreaView, StyleSheet } from "react-native";
+import { View, Text, ScrollView, TouchableOpacity, Image, Modal, SafeAreaView, StyleSheet,TextInput,FlatList } from "react-native";
 import { Searchbar } from "react-native-paper";
 import { GlobalInfo } from "../App";
 import { Data } from "./Data";
@@ -9,11 +9,36 @@ import { Header } from "./Header";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { CommonForm } from "./CommonForm";
 import PagerView from 'react-native-pager-view';
-
+import Feather  from "react-native-vector-icons/Feather";
 
 
 export const Compare = () => {
-    const {allDatas,setAllDatas,filterAr,setFilterAr,cities,setCities,filterMenu,openModal,openModal1,isModalVisible,isModalVisible1,activeItem,activeItem1,setActive,setActive1,setModalVisible,setModalVisible1,closeModal,closeModal1,searchbar:searchbar,setSearchbar:setSearchbar,dataUse:dataUse,setDataUse:setDataUse,dataFilter:dataFilter,}=useContext(GlobalInfo)
+    const { allDatas, setAllDatas, filterAr, setFilterAr, cities, setCities, filterMenu, openModal, openModal1, openModal2, isModalVisible, isModalVisible1, isModalVisible2, activeItem, activeItem1, activeItem2, setActive, setActive1, setActive2, setModalVisible, setModalVisible1, setModalVisible2, closeModal, closeModal1, closeModal2, searchbar, setSearchbar, dataUse, setDataUse, dataFilter, dataUsage, setDataUsage,
+        openModal3,
+        closeModal3,
+        isModalVisible3,
+        setModalVisible3,
+        activeItem3,
+        setActive3,
+        spacing,
+        AVATAR_SIZE,
+        editItem,
+        isEditItem,
+        setIsEditItem,
+        toggleBtn,
+        setToggleBtn,
+        input,
+        setInput,
+        setSubmitData,
+        submitData,
+        onSubmit,
+        openModal4,
+        closeModal4,
+        isModalVisible4,
+        setModalVisible4,
+        activeItem4,
+        setActive4,
+    } = useContext(GlobalInfo)
     console.log("open", openModal)
     const navigation = useNavigation()
 
@@ -41,25 +66,126 @@ export const Compare = () => {
 
 export const CompareSchools = () => {
     console.log('sdhdcbchjds')
-    const {allDatas,setAllDatas,filterAr,setFilterAr,cities,setCities,filterMenu,openModal,openModal1,isModalVisible,isModalVisible1,activeItem,activeItem1,setActive,setActive1,setModalVisible,setModalVisible1,closeModal,closeModal1,searchbar,setSearchbar,dataUse,setDataUse,dataFilter,}=useContext(GlobalInfo)
+    const { allDatas, setAllDatas, filterAr, setFilterAr, cities, setCities, filterMenu, openModal, openModal1, openModal2, isModalVisible, isModalVisible1, isModalVisible2, activeItem, activeItem1, activeItem2, setActive, setActive1, setActive2, setModalVisible, setModalVisible1, setModalVisible2, closeModal, closeModal1, closeModal2, searchbar, setSearchbar, dataUse, setDataUse, dataFilter, dataUsage, setDataUsage,
+        openModal3,
+        closeModal3,
+        isModalVisible3,
+        setModalVisible3,
+        activeItem3,
+        setActive3,
+        spacing,
+        AVATAR_SIZE,
+        editItem,
+        isEditItem,
+        setIsEditItem,
+        toggleBtn,
+        setToggleBtn,
+        input,
+        setInput,
+        setSubmitData,
+        submitData,
+        onSubmit,
+        openModal4,
+        closeModal4,
+        isModalVisible4,
+        setModalVisible4,
+        activeItem4,
+        setActive4,
+        openModal7,
+        closeModal7,
+        isModalVisible7,
+        setModalVisible7,
+        activeItem7,
+        setActive7,
+    } = useContext(GlobalInfo)
 console.log("opentry",openModal1)
     return (
         <SafeAreaView style={{  flexDirection: "row",backgroundColor:"#e6e6fa",flex:1}}>
             <View style={styles.categoryItemWrapper}>
-            <TouchableOpacity onPress={openModal1}>
+            <TouchableOpacity onPress={openModal7}>
                 <Image source={require("./Images/plus.png")} color="#e6e6fa" style={styles.categoryItemImage}  />
                 </TouchableOpacity>
                 <Text style={styles.categoryItemTitle}>Add School</Text>
            
             </View>
             <View style={styles.categoryItemWrapper}>
-            <TouchableOpacity onPress={openModal1}>
+            <TouchableOpacity onPress={openModal7}>
                 <Image source={require("./Images/plus.png")} color="#e6e6fa" style={styles.categoryItemImage}  />
                 </TouchableOpacity>
                 <Text style={styles.categoryItemTitle}>Add School</Text>
              
             </View>
+            <Modal
+                animationType='slide'
+                visible={isModalVisible7}
+                onRequestClose={() => {
+                    setModalVisible7(!isModalVisible7)
+                }}
+            >
+
+                <View>
+                    <View >
+                        <Header openModal={openModal} cities={cities} />
+                    </View>
+
+                    <View style={styles.searchSection}     >
+                        <Feather name="search" size={20} color="#000" style={{ marginLeft: 10 }} />
+                        <TextInput
+                            style={styles.input}
+                            value={searchbar}
+                            onChangeText={(newVal) => setSearchbar(newVal)}
+                            placeholder="Which School are you looking?"
+
+                        />
+                    </View>
+                    {
+                        searchbar ?
+                            <FlatList
+                                data={dataUse}
+
+                                contentContainerStyle={{
+                                    paddingLeft: 10,
+                                    paddingRight: 10
+                                    // paddingTop: StatusBar.currentHeight || 42
+                                }}
+                                renderItem={(val) => {
+                                    const valll = val;
+                                    console.log("vvxasdasdasadsadssadasd", val)
+                                    return (
+                                        <View>
+                                            
+
+                                            <TouchableOpacity style={{
+                                                flexDirection: "row", marginBottom: 2, backgroundColor: "white",
+                                                // elevation: 10,
+                                                // shadowColor: '#000',
+                                            }} onPress={() => navigation.navigate("SchoolProfile", { val })}>
+                                                <Image source={require('./Images/school.jpg')}
+                                                    style={{
+                                                        width: 40, height: 40, borderRadius: 40,
+
+                                                    }} />
+                                                <View>
+                                                    <Text style={{ fontSize: 16, fontWeight: "400", marginTop: 10 }} >{val.item.name}</Text>
+                                                </View>
+                                            </TouchableOpacity>
+                                            <View
+                                                style={{
+                                                    borderBottomColor: 'grey',
+                                                    borderBottomWidth: 1,
+                                                }}
+                                            />
+                                        </View>
+
+                                    )
+                                }} /> :
+                            <>
+                            </>}
+                            </View>
+                            </Modal>
+                            
         </SafeAreaView>
+     
      
     )
 }
@@ -305,6 +431,27 @@ const styles = StyleSheet.create({
         color: 'black',
         fontSize: 18,
         marginLeft: 15
+    },
+    searchSection: {
+        margin: 20,
+
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#fff',
+        borderColor: "grey",
+        borderWidth: 1,
+        shadowColor: "black",
+        elevation: 10
+    },
+    input: {
+        flex: 1,
+        paddingTop: 10,
+        paddingRight: 10,
+        paddingBottom: 10,
+        paddingLeft: 10,
+        backgroundColor: '#fff',
+        color: '#424242',
     },
 
 });

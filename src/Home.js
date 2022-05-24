@@ -374,6 +374,7 @@ export const Home = (props) => {
                                     console.log("vvxasdasdasadsadssadasd", val)
                                     return (
                                         <View>
+                                            
 
                                             <TouchableOpacity style={{
                                                 flexDirection: "row", marginBottom: 2, backgroundColor: "white",

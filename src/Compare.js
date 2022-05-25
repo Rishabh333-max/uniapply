@@ -39,7 +39,7 @@ export const Compare = () => {
         activeItem4,
         setActive4,
     } = useContext(GlobalInfo)
-    console.log("open", openModal)
+    // console.log("open", openModal)
     const navigation = useNavigation()
 
 
@@ -64,8 +64,11 @@ export const Compare = () => {
 
 
 
-export const CompareSchools = () => {
-    console.log('sdhdcbchjds')
+export const CompareSchools = (props) => {
+    const firstSchoolNameComponent = props.route.params?.val?.item
+    const secondSchoolNameComponent = props.route.params?.Valentine?.item
+
+    console.log('sdhdcbchjds',props)
     const { allDatas, setAllDatas, filterAr, setFilterAr, cities, setCities, filterMenu, openModal, openModal1, openModal2, isModalVisible, isModalVisible1, isModalVisible2, activeItem, activeItem1, activeItem2, setActive, setActive1, setActive2, setModalVisible, setModalVisible1, setModalVisible2, closeModal, closeModal1, closeModal2, searchbar, setSearchbar, dataUse, setDataUse, dataFilter, dataUsage, setDataUsage,
         openModal3,
         closeModal3,
@@ -97,24 +100,64 @@ export const CompareSchools = () => {
         setModalVisible7,
         activeItem7,
         setActive7,
+        openModal8,
+        closeModal8,
+        isModalVisible8,
+        setModalVisible8,
+        activeItem8,
+        setActive8,
     } = useContext(GlobalInfo)
-console.log("opentry",openModal1)
+// console.log("opentry",openModal1)
+
+const navigation=useNavigation()
     return (
+      
         <SafeAreaView style={{  flexDirection: "row",backgroundColor:"#e6e6fa",flex:1}}>
-            <View style={styles.categoryItemWrapper}>
-            <TouchableOpacity onPress={openModal7}>
-                <Image source={require("./Images/plus.png")} color="#e6e6fa" style={styles.categoryItemImage}  />
-                </TouchableOpacity>
-                <Text style={styles.categoryItemTitle}>Add School</Text>
            
-            </View>
-            <View style={styles.categoryItemWrapper}>
-            <TouchableOpacity onPress={openModal7}>
-                <Image source={require("./Images/plus.png")} color="#e6e6fa" style={styles.categoryItemImage}  />
-                </TouchableOpacity>
-                <Text style={styles.categoryItemTitle}>Add School</Text>
+            
+            {
+                secondSchoolNameComponent?<>
+                  <View style={styles.categoryItemWrapper1}>
+                <TouchableOpacity onPress={()=>navigation.navigate("SchoolProfile",{val})}>
+                    <Image source={{uri:secondSchoolNameComponent.imgUrl}} color="#e6e6fa" style={styles.categoryItemImage1}  />
+                    <Text style={{color:"black",fontSize:14,}} numberOfLines={1}>{secondSchoolNameComponent.name}</Text>
+                    <Text style={{fontSize:10,}} numberOfLines={1}>{secondSchoolNameComponent.address}</Text>
+                    <Text style={{backgroundColor:"#E52B50",color:"white",padding:5,justifyContent:"center",marginLeft:20,marginTop:10,borderRadius:10,alignItems:"center",width:80}}>Apply</Text>
+                    </TouchableOpacity>
              
-            </View>
+               
+                </View>
+                </>:
+                <View style={styles.categoryItemWrapper}>
+                <TouchableOpacity onPress={openModal8}>
+                    <Image source={require("./Images/plus.png")} color="#e6e6fa" style={styles.categoryItemImage}  />
+                    </TouchableOpacity>
+                    <Text style={styles.categoryItemTitle}>Add School</Text>
+               
+                </View>
+              }  
+
+{
+                firstSchoolNameComponent?<>
+                  <View style={styles.categoryItemWrapper1}>
+                <TouchableOpacity onPress={()=>navigation.navigate("SchoolProfile",{val})}>
+                    <Image source={{uri:firstSchoolNameComponent.imgUrl}} color="#e6e6fa" style={styles.categoryItemImage1}  />
+                    <Text style={{color:"black",fontSize:14,}} numberOfLines={1}>{firstSchoolNameComponent.name}</Text>
+                    <Text style={{fontSize:10,}} numberOfLines={1}>{firstSchoolNameComponent.address}</Text>
+                    <Text style={{backgroundColor:"#E52B50",color:"white",padding:5,justifyContent:"center",marginLeft:20,marginTop:10,borderRadius:10,alignItems:"center",width:80}}>Apply</Text>
+                    </TouchableOpacity>
+             
+               
+                </View>
+                </>:
+                <View style={styles.categoryItemWrapper}>
+                <TouchableOpacity onPress={openModal7}>
+                    <Image source={require("./Images/plus.png")} color="#e6e6fa" style={styles.categoryItemImage}  />
+                    </TouchableOpacity>
+                    <Text style={styles.categoryItemTitle}>Add School</Text>
+               
+                </View>
+              }  
             <Modal
                 animationType='slide'
                 visible={isModalVisible7}
@@ -150,7 +193,7 @@ console.log("opentry",openModal1)
                                 }}
                                 renderItem={(val) => {
                                     const valll = val;
-                                    console.log("vvxasdasdasadsadssadasd", val)
+                                    // console.log("vvxasdasdasadsadssadasd", val)
                                     return (
                                         <View>
                                             
@@ -159,7 +202,8 @@ console.log("opentry",openModal1)
                                                 flexDirection: "row", marginBottom: 2, backgroundColor: "white",
                                                 // elevation: 10,
                                                 // shadowColor: '#000',
-                                            }} onPress={() => navigation.navigate("SchoolProfile", { val })}>
+                                            }} onPress={() => {navigation.navigate("CompareSchools", { val }); setModalVisible7(!isModalVisible7)}}>
+                                              
                                                 <Image source={require('./Images/school.jpg')}
                                                     style={{
                                                         width: 40, height: 40, borderRadius: 40,
@@ -183,7 +227,77 @@ console.log("opentry",openModal1)
                             </>}
                             </View>
                             </Modal>
-                            
+
+                        <Modal
+                animationType='slide'
+                visible={isModalVisible8}
+                onRequestClose={() => {
+                    setModalVisible8(!isModalVisible8)
+                }}
+            >
+
+                <View>
+                    <View >
+                        <Header openModal={openModal} cities={cities} />
+                    </View>
+
+                    <View style={styles.searchSection}     >
+                        <Feather name="search" size={20} color="#000" style={{ marginLeft: 10 }} />
+                        <TextInput
+                            style={styles.input}
+                            value={searchbar}
+                            onChangeText={(newVal) => setSearchbar(newVal)}
+                            placeholder="Which School are you looking?"
+
+                        />
+                    </View>
+                    {
+                        searchbar ?
+                            <FlatList
+                                data={dataUse}
+
+                                contentContainerStyle={{
+                                    paddingLeft: 10,
+                                    paddingRight: 10
+                                    // paddingTop: StatusBar.currentHeight || 42
+                                }}
+                                renderItem={(Valentine) => {
+                                    const valll = Valentine;
+                                    // console.log("vvxasdasdasadsadssadasd", val)
+                                    return (
+                                        <View>
+                                            
+
+                                            <TouchableOpacity style={{
+                                                flexDirection: "row", marginBottom: 2, backgroundColor: "white",
+                                                // elevation: 10,
+                                                // shadowColor: '#000',
+                                            }} onPress={() => {navigation.navigate("CompareSchools", { Valentine }); setModalVisible8(!isModalVisible8)}}>
+                                              
+                                                <Image source={require('./Images/school.jpg')}
+                                                    style={{
+                                                        width: 40, height: 40, borderRadius: 40,
+
+                                                    }} />
+                                                <View>
+                                                    <Text style={{ fontSize: 16, fontWeight: "400", marginTop: 10 }} >{Valentine.item.name}</Text>
+                                                </View>
+                                            </TouchableOpacity>
+                                            <View
+                                                style={{
+                                                    borderBottomColor: 'grey',
+                                                    borderBottomWidth: 1,
+                                                }}
+                                            />
+                                        </View>
+
+                                    )
+                                }} /> :
+                            <>
+                            </>}
+                            </View>
+                            </Modal>
+                                 
         </SafeAreaView>
      
      
@@ -394,9 +508,33 @@ const styles = StyleSheet.create({
         borderRadius:4
 
     },
+    categoryItemWrapper1:{
+        flex:1,
+        backgroundColor: "white",
+        // marginRight:20,
+        borderRadius: 2,
+    //    padding:20,
+        elevation: 10,
+    //   paddingHorizontal:30,
+    //   paddingVertical:8,
+      marginTop:20,
+      height:220,
+      width:180,
+      alignItems:"center",
+        shadowColor: "#000",
+        marginHorizontal:20,
+        // justifyContent:"center",
+        borderRadius:4
+    },
     categoryItemImage: {
         width: 36,
         height: 36,
+        color:"#034694"
+   
+    },
+    categoryItemImage1: {
+        width: 136,
+        height: 140,
         color:"#034694"
    
     },

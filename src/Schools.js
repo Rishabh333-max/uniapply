@@ -13,13 +13,13 @@ import { GlobalInfo } from "../App";
 export const Schools = ({route}) => {
  
     // console.log("ccz",{CityInfo})
-    console.log("routes", route)
+    // console.log("routes", route)
     const navigation = useNavigation()
  
     const {allDatas,setAllDatas,filterAr,setFilterAr,cities,setCities,filterMenu,openModal,isModalVisible,activeItem,isActve,setModalVisible,closeModal,dataUse}=useContext(GlobalInfo)
     // const [isModalVisible, setModalVisible] = useState(false);
     // const [activeItem, setActive] = useState(false)
-    console.log("ddsd",dataUse)
+    // console.log("ddsd",dataUse)
     const [searchbar, setSearchbar] = useState("")
     const [citi,setCiti]=useState(cities)
     const [upItems,setUpItems]=useState(Data.length)

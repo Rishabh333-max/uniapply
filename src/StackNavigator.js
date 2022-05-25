@@ -2,7 +2,7 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { AllSchools, Home } from "./Home";
 import { Application } from "./Application";
-import { Compare } from "./Compare";
+import { Card1, Card2, Compare } from "./Compare";
 import { Schools } from "./Schools";
 import { Profile } from "./Profile";
 import { Admissions } from "./Admissions";
@@ -45,7 +45,9 @@ const MainStackNavigator = () => {
       <Stack.Screen name="EligibilityCriteria" component={EligibilityCriteria} options={{headerShown:false}}/>
       <Stack.Screen name="DocumentsRequired" component={DocumentsRequired} options={{headerShown:false}}/>
       <Stack.Screen name="ShortListedStudent" component={ShortListedStudent} options={{headerShown:false}}/>
- 
+      {/* <Stack.Screen name="Card1" component={Card1} options={{headerShown:false}}/>
+      <Stack.Screen name="Card2" component={Card2} options={{headerShown:false}}/>
+  */}
     </Stack.Navigator>
   );
 }

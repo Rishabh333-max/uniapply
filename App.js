@@ -59,7 +59,7 @@ const App = () => {
   const [allDatas, setAllDatas] = useState("")
 
   const [filterAr, setFilterAr] = useState(Data)
-  console.log("filterAr", filterAr)
+  // console.log("filterAr", filterAr)
   const [cities, setCities] = useState(Data);
 
   const filterMenu = (category) => {
@@ -114,7 +114,7 @@ const App = () => {
   const [isModalVisible2, setModalVisible2] = useState(false);
   const [activeItem2, setActive2] = useState(false)
   const openModal2 = (item) => {
-    console.log("iteeeeem", dataUse)
+    // console.log("iteeeeem", dataUse)
     setActive2(item || false)
     setModalVisible2(true)
     setDataUsage(dataUsage)
@@ -126,8 +126,8 @@ const App = () => {
   const [searchbar, setSearchbar] = useState("")
 
   const [dataUse, setDataUse] = useState([])
-  console.log("dataUse", dataUse)
-  console.log("dataUse", dataUse?.[0]?.id)
+  // console.log("dataUse", dataUse)
+  // console.log("dataUse", dataUse?.[0]?.id)
   useEffect(() => {
     setDataUse(cities)
   }, [cities])
@@ -136,14 +136,14 @@ const App = () => {
 
     if (keyword !== '') {
       const results = dataUse.filter((inputFilter) => {
-        console.log("i", inputFilter)
+        // console.log("i", inputFilter)
         return inputFilter.name.toLowerCase().startsWith(keyword.toLowerCase())
       });
 
       setDataUse(results);
     } else {
       setDataUse(cities);
-      console.log("cities", cities)
+      // console.log("cities", cities)
 
     }
   }
@@ -164,7 +164,7 @@ const App = () => {
     },
   };
   const [dataUsage, setDataUsage] = useState(dataUse);
-  console.log("daaaa", dataUsage)
+  // console.log("daaaa", dataUsage)
 
 
   const [input, setInput] = useState({
@@ -216,10 +216,10 @@ const App = () => {
   // const [storeData,setStoreData]=useState(newEditItem)
   // console.log('ssnbd',storeData)
   const editItem = (ids) => {
-    console.log("ids", ids)
+    // console.log("ids", ids)
 
     let newEditItem = submitData.find((elem) => {
-      console.log(":testelem", elem)
+      // console.log(":testelem", elem)
       return elem.id === ids.item.id
     })
 
@@ -237,7 +237,7 @@ const App = () => {
 
 
     else {
-      { console.log("123", newEditItem) }
+      // { console.log("123", newEditItem) }
       setInput({
         name: input.name,
         email: input.email,
@@ -258,7 +258,7 @@ const App = () => {
 // console.log("setValuekaData",valueKaData)
 
   const openModal5 = (item) => {
-    console.log("openModal5",item)
+    // console.log("openModal5",item)
     setActive5(item || false)
     setModalVisible5(true)
     // setValueKaData(item)
@@ -269,11 +269,11 @@ const App = () => {
   }
 
   const [wish,setWish]=useState(dataUse)
-  console.log('whisj',wish)
+  // console.log('whisj',wish)
 
   const [cartItems,setCartItems]=useState([]);
   const wishlist=(product)=>{
-      console.log("or",product)
+      // console.log("or",product)
       const ProductExist=cartItems.find((item)=>item.id === product.id);
       if(ProductExist){
           setCartItems(cartItems.map(item=>item.id === product.id?
@@ -289,7 +289,7 @@ const App = () => {
   const [isModalVisible7, setModalVisible7] = useState(false);
   const [activeItem7, setActive7] = useState(false)
   const openModal7 = (item) => {
-    console.log("iteeeeem", dataUse)
+    // console.log("iteeeeem", dataUse)
     setActive7(item || false)
     setModalVisible7(true)
     setDataUsage(dataUsage)
@@ -297,6 +297,19 @@ const App = () => {
   const closeModal7 = () => {
     setActive7(false)
     setModalVisible7(false)
+  }
+
+  const [isModalVisible8, setModalVisible8] = useState(false);
+  const [activeItem8, setActive8] = useState(false)
+  const openModal8 = (item) => {
+    // console.log("iteeeeem", dataUse)
+    setActive8(item || false)
+    setModalVisible8(true)
+    setDataUsage(dataUsage)
+  }
+  const closeModal8 = () => {
+    setActive8(false)
+    setModalVisible8(false)
   }
   return (
     <GlobalInfo.Provider value={{
@@ -377,6 +390,13 @@ const App = () => {
       setModalVisible7: setModalVisible7,
       activeItem7: activeItem7,
       setActive7: setActive7,
+
+      openModal8:openModal8,
+      closeModal8: closeModal8,
+      isModalVisible8: isModalVisible8,
+      setModalVisible8: setModalVisible8,
+      activeItem8: activeItem8,
+      setActive8: setActive8,
     }}>
       <PaperProvider theme={theme}>
         <NavigationContainer>

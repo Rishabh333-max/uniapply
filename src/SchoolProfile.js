@@ -5,7 +5,7 @@ import { View, Text, Modal, TouchableOpacity, ScrollView, Image, FlatList, Statu
 import { GlobalInfo } from "../App";
 
 export const SchoolProfile = (val) => {
-    console.log("agra", val)
+    // console.log("agra", val)
 
 
     const [valueData, setValueData] = useState(val)
@@ -43,8 +43,8 @@ export const SchoolProfile = (val) => {
         activeItem5,
         setActive5,
     } = useContext(GlobalInfo)
-    console.log("schoolProfile", activeItem2)
-    console.log('dataset', dataUse)
+    // console.log("schoolProfile", activeItem2)
+    // console.log('dataset', dataUse)
 
 
     const { mode } = val.route.params
@@ -424,8 +424,8 @@ export const SchoolProfile = (val) => {
                                 paddingTop: StatusBar.currentHeight || 42
                             }}
                             renderItem={(val) => {
-                                console.log("rprp", val.item.id)
-                                console.log("khkh", val)
+                                // console.log("rprp", val.item.id)
+                                // console.log("khkh", val)
                                 return (
                                     <TouchableOpacity style={{
                                         flexDirection: "row", padding: spacing, marginBottom: spacing, borderRadius: 16, backgroundColor: "white",

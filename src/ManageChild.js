@@ -628,8 +628,8 @@ export const ManageChild = (props) => {
                                 paddingTop: StatusBar.currentHeight || 42
                             }}
                             renderItem={(val) => {
-                                console.log("sd", val.item.id)
-                                console.log("vvxcx", val)
+                                // console.log("sd", val.item.id)
+                                // console.log("vvxcx", val)
                                 return (
                                     <TouchableOpacity style={{
                                         flexDirection: "row", padding: spacing, marginBottom: spacing, borderRadius: 16, backgroundColor: "white",

@@ -52,10 +52,10 @@ export const Home = (props) => {
         activeItem4,
         setActive4,
     } = useContext(GlobalInfo)
-    console.log("kkkk", submitData)
+    // console.log("kkkk", submitData)
     const getData = () => {
         const [dataaa, setDataaa] = useState('');
-        console.log("snbsbnas", dataaa)
+        // console.log("snbsbnas", dataaa)
         setDataaa(val)
     }
     // console.log("Citiesass",cities)
@@ -97,7 +97,7 @@ export const Home = (props) => {
 
 
 
-    console.log("activeItem2", activeItem2)
+    // console.log("activeItem2", activeItem2)
     return (
 
 
@@ -133,7 +133,7 @@ export const Home = (props) => {
                 <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
                     <Text style={{ marginLeft: 20, fontSize: 20 }}>Schools in {cities?.[0]?.category}</Text>
                     <TouchableOpacity onPress={() => navigation.navigate("Schools", { cities: cities })}>
-                        {console.log("cima", cities)}
+                        {/* {console.log("cima", cities)} */}
 
                         <Text style={{ color: "blue", marginRight: 20, marginTop: 6 }}   >View All 718 Schools</Text>
                     </TouchableOpacity>
@@ -141,7 +141,7 @@ export const Home = (props) => {
                 </View>
                 <ScrollView horizontal={true}>
 
-{console.log("fffff",filterAr)}
+{/* {console.log("fffff",filterAr)} */}
                     {filterAr.map((elem) => (
 
                     <View style={{ margin: 10 }} key={elem.id} >
@@ -371,7 +371,7 @@ export const Home = (props) => {
                                 }}
                                 renderItem={(val) => {
                                     const valll = val;
-                                    console.log("vvxasdasdasadsadssadasd", val)
+                                    // console.log("vvxasdasdasadsadssadasd", val)
                                     return (
                                         <View>
                                             
